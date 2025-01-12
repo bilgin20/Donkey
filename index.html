@@ -11,7 +11,6 @@
     <link rel="icon" type="image/x-icon" href="./assets/favicon/favicon.ico">
 </head>
 <body>
-    
 
     <div class="coin-count-container">
         <img src="./assets/images/hamster.png" width="45px">
@@ -30,6 +29,19 @@
     <div class="coin-container">
         <img src="./assets/images/hamster.png" id="coin" class="select-none" width="300px" />
     </div>
+
+    <!-- Message from the Lord of the Donkey -->
+    <div class="message-container">
+        <div class="message-content">
+            <h2>Message from the Lord of the Donkey:</h2>
+            <p>
+                Hey FriendZzz, now is the time to start, playing games, completing tasks and getting DONKEY to get the biggest share of the airdrop!
+            </p>
+            <p>
+                Airdrop Date: Dec 2024-Jan 2025
+            </p>
+        </div>
+    </div>
     
     <div class="menu-container">
         <div class="power">
@@ -39,12 +51,7 @@
                 <span class="gray select-none" id="total">/0</span>
             </div>
         </div>
-          Message from the Lord of the Donkey:
-
-         Hey FriendZzz, now is the time to start, playing games, completing tasks and getting DONKEY to get the biggest share of the airdrop!
-
-         Airdrop Date
-         Dec 2024-Jan 2025
+          
         <div class="menu-bottuns">
             <a href="frens.html" class="button b-r">
                 <img src="./assets/images/1.png" alt="" width="28px">
@@ -75,9 +82,9 @@
             power += DAILY_BONUS;
             localStorage.setItem('power', power);
             powerElement.textContent = power;
-            alert(Daily bonus of ${DAILY_BONUS} points added!);
+            alert(`Daily bonus of ${DAILY_BONUS} points added!`);
         });
     </script>
     <script src="./assets/js/main.js"></script>
 </body>
-</html> 
+</html>
