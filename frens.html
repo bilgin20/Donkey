@@ -74,6 +74,8 @@
     <script src="./assets/js/charge.js"></script>
     <script>
         const friendsList = document.getElementById('friendsList');
+        const copyButton = document.getElementById('copyButton');
+        const linkInput = document.getElementById('link');
         let invitedFriends = JSON.parse(localStorage.getItem('invitedFriends')) || [];
 
         function saveFriends() {
@@ -97,13 +99,25 @@
             }
         }
 
-        // Sample usage (you can replace this with real input)
+        function updateLinkWithFriendName(name) {
+            const baseUrl = "https://t.me/DonkeyToken_bot/donkeytoken";
+            linkInput.value = `${baseUrl}?name=${encodeURIComponent(name)}`;
+        }
+
+        copyButton.addEventListener('click', () => {
+            const friendName = prompt('Enter the name of the invited friend:');
+            if (friendName) {
+                addFriend(friendName);
+                updateLinkWithFriendName(friendName);
+                linkInput.select();
+                document.execCommand('copy');
+                alert(`Invite link copied with ${friendName}`);
+            }
+        });
+
+        // Initialize the page with existing invited friends
         document.addEventListener('DOMContentLoaded', () => {
             displayInvitedFriends();
-            // Example usage (simulated new friend entry)
-            setTimeout(() => {
-                addFriend(prompt('Enter the name of the invited friend:'));
-            }, 2000);
         });
     </script>
 </body>
