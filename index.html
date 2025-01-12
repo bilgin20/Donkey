@@ -14,7 +14,9 @@
     <div class="squad-container">
         <div class="login">
             <div class="login-detail">
-                <div class="profile"><span></span></div>
+                <div class="profile">
+                    <span></span>
+                </div>
                 <div class="user-data">
                     <span class="name"></span>
                     <span class="user-rank"></span>
@@ -38,7 +40,7 @@
 
     <div class="rank-container">
         <div class="rank-items">
-            <h3 class="select-none" id="clan">Clan</h3>
+            <h3 class="select-none"></h3>
             <span></span>
             <img src="./assets/images/hamster.png" class="select-none" width="30px">
             <span id="rank" class="select-none">DonkeyTOKEN</span>
@@ -78,17 +80,32 @@
         <div class="progress"></div>
     </div>
 
+    <script src="./assets/js/main.js"></script>
     <script>
         const DAILY_BONUS = 1000;
-        const clanButton = document.getElementById('clan');
-        const powerElement = document.getElementById('power');
+        const lastLoginDate = localStorage.getItem('lastLoginDate');
+        const currentDate = new Date().toDateString();
+        const totalElement = document.querySelector('#total');
+        const powerElement = document.querySelector('#power');
+        const coinImage = document.getElementById('coin');
 
-        clanButton.addEventListener('click', () => {
-            let power = parseInt(localStorage.getItem('power') || '0');
+        let total = parseInt(localStorage.getItem('total') || '500');
+        let power = parseInt(localStorage.getItem('power') || '500');
+
+        if (lastLoginDate !== currentDate) {
+            total += DAILY_BONUS;
             power += DAILY_BONUS;
+            localStorage.setItem('total', total);
             localStorage.setItem('power', power);
+            localStorage.setItem('lastLoginDate', currentDate);
+            totalElement.textContent = /${total};
             powerElement.textContent = power;
-            alert(`Daily bonus of ${DAILY_BONUS} points added!`);
+        }
+
+        coinImage.addEventListener('click', () => {
+            if (lastLoginDate !== currentDate) {
+                alert(Daily bonus of ${DAILY_BONUS} points added!);
+            }
         });
     </script>
 </body>
