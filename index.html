@@ -33,7 +33,7 @@
 
     <div class="coin-count-container">
         <img src="./assets/images/hamster.png" width="45px">
-        <h1 class="select-none" id="coin-count">0</h1>
+        <h1 class="select-none">0</h1>
     </div>
 
     <div class="rank-container">
@@ -53,7 +53,7 @@
         <div class="power">
             <img src="./assets/images/28.png" width="40px">
             <div class="power-count">
-                <span id="coin" class="select-none">0</span>
+                <span id="power" class="select-none">0</span>
                 <span class="gray select-none" id="total">/0</span>
             </div>
         </div>
@@ -81,15 +81,15 @@
     <script>
         const DAILY_BONUS = 1000;
         const clanButton = document.getElementById('clan');
-        const coinCountElement = document.getElementById('coin-count');
+        const powerElement = document.getElementById('power');
 
         clanButton.addEventListener('click', () => {
-            let coinCount = parseInt(localStorage.getItem('coinCount') || '0');
-            coinCount += DAILY_BONUS;
-            localStorage.setItem('coinCount', coinCount);
-            coinCountElement.textContent = coinCount;
-            alert(`Daily bonus of ${DAILY_BONUS} coins added!`);
+            let power = parseInt(localStorage.getItem('power') || '0');
+            power += DAILY_BONUS;
+            localStorage.setItem('power', power);
+            powerElement.textContent = power;
+            alert(Daily bonus of ${DAILY_BONUS} points added!);
         });
     </script>
 </body>
-</html>
+</html> 
