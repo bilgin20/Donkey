@@ -75,15 +75,26 @@
     <script>
         const friendsList = document.getElementById('friendsList');
 
-        // Sample data of invited friends (replace with actual data retrieval logic)
-        const invitedFriends = ['Alice', 'Bob', 'Charlie', 'David', 'Eve'];
+        // API'den davet edilen arkadaşların listesini almak
+        async function fetchInvitedFriends() {
+            try {
+                const response = await fetch('https://example.com/api/invited-friends'); // Burayı kendi API adresinizle değiştirin
+                const data = await response.json();
 
-        // Populate the list with friend names
-        invitedFriends.forEach((friend, index) => {
-            const listItem = document.createElement('li');
-            listItem.textContent = `${index + 1}. ${friend}`;
-            friendsList.appendChild(listItem);
-        });
+                // Listeyi temizleyip arkadaşları ekleyin
+                friendsList.innerHTML = '';
+                data.friends.forEach((friend, index) => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = `${index + 1}. ${friend.name}`;
+                    friendsList.appendChild(listItem);
+                });
+            } catch (error) {
+                console.error('Arkadaş listesi alınırken hata:', error);
+            }
+        }
+
+        // Sayfa yüklendiğinde arkadaş listesini getir
+        document.addEventListener('DOMContentLoaded', fetchInvitedFriends);
     </script>
 </body>
 </html>
