@@ -10,17 +10,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="icon" type="image/x-icon" href="./assets/favicon/favicon.ico">
     <style>
+        /* TonConnect Wallet Button in the center of the top */
         .tonconnect-wallet-container {
-            position: absolute;
+            position: fixed;
             top: 20px;
-            right: 20px;
+            left: 50%;
+            transform: translateX(-50%);
             z-index: 10;
         }
     </style>
 </head>
 <body>
 
-    <!-- TonConnect Wallet Integration (Buton en üstte) -->
+    <!-- TonConnect Wallet Integration (Buton en üstte, ortada) -->
     <div class="tonconnect-wallet-container">
         <button onclick="connectWallet()">CONNECT WALLET</button>
     </div>
