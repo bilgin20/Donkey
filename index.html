@@ -9,24 +9,19 @@
     <meta name="theme-color" content="#f19e36" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="icon" type="image/x-icon" href="./assets/favicon/favicon.ico">
-
 </head>
 <body>
-
-    
     <div class="squad-container">
         <div class="login">
             <div class="login-detail">
                 <div class="profile">
                     <span></span>
                 </div>
-
                 <div class="user-data">
                     <span class="name"></span>
                     <span class="user-rank"></span>
                 </div>
             </div>
-
             <div>
                 <a href="login.html">
                     <svg width="30px" height="30px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -40,7 +35,7 @@
 
     <div class="coin-count-container">
         <img src="./assets/images/hamster.png" width="45px">
-        <h1 class="select-none"></h1>
+        <h1 class="select-none">0</h1>
     </div>
 
     <div class="rank-container">
@@ -53,10 +48,9 @@
     </div>
     
     <div class="coin-container">
-     
         <img src="./assets/images/hamster.png" id="coin" class="select-none" width="300px" />
     </div>
-<br><br><br>
+    
     <div class="menu-container">
         <div class="power">
             <img src="./assets/images/28.png" width="40px">
@@ -86,7 +80,33 @@
         <div class="progress"></div>
     </div>
 
-
     <script src="./assets/js/main.js"></script>
+    <script>
+        const DAILY_BONUS = 1000;
+        const lastLoginDate = localStorage.getItem('lastLoginDate');
+        const currentDate = new Date().toDateString();
+        const totalElement = document.querySelector('#total');
+        const powerElement = document.querySelector('#power');
+        const coinImage = document.getElementById('coin');
+
+        let total = parseInt(localStorage.getItem('total') || '500');
+        let power = parseInt(localStorage.getItem('power') || '500');
+
+        if (lastLoginDate !== currentDate) {
+            total += DAILY_BONUS;
+            power += DAILY_BONUS;
+            localStorage.setItem('total', total);
+            localStorage.setItem('power', power);
+            localStorage.setItem('lastLoginDate', currentDate);
+            totalElement.textContent = `/${total}`;
+            powerElement.textContent = power;
+        }
+
+        coinImage.addEventListener('click', () => {
+            if (lastLoginDate !== currentDate) {
+                alert(`Daily bonus of ${DAILY_BONUS} points added!`);
+            }
+        });
+    </script>
 </body>
 </html>
