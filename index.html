@@ -10,10 +10,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="icon" type="image/x-icon" href="./assets/favicon/favicon.ico">
     <style>
-        /* TonConnect Wallet Button in the center of the top */
+        /* TonConnect Wallet Button */
         .tonconnect-wallet-container {
-            position: fixed;
-            top: 20px;
+            position: absolute;
+            top: calc(100px + 10px); /* "DonkeyTOKEN" yazısından 10px altına */
             left: 50%;
             transform: translateX(-50%);
             z-index: 10;
@@ -21,11 +21,6 @@
     </style>
 </head>
 <body>
-
-    <!-- TonConnect Wallet Integration (Buton en üstte, ortada) -->
-    <div class="tonconnect-wallet-container">
-        <button onclick="connectWallet()">CONNECT WALLET</button>
-    </div>
 
     <!-- Coin Count Section -->
     <div class="coin-count-container">
@@ -42,6 +37,11 @@
         </div>
     </div>
     
+    <!-- TonConnect Wallet Integration - Button Just Below DonkeyTOKEN -->
+    <div class="tonconnect-wallet-container">
+        <button onclick="connectWallet()">CONNECT WALLET</button>
+    </div>
+
     <div class="coin-container">
         <img src="./assets/images/hamster.png" id="coin" class="select-none" width="300px" />
     </div>
@@ -89,6 +89,7 @@
         <div class="progress"></div>
     </div>
 
+    <!-- TonConnect Wallet Integration -->
     <script src="https://unpkg.com/@tonconnect/sdk@latest/dist/tonconnect-sdk.min.js"></script>
     <script>
         const connector = new TonConnectSDK.TonConnect({
@@ -130,7 +131,7 @@
               })
               .catch((error) => console.error("Fetch Error:", error));
 
-            // Display the connected wallet address
+            // Display formatted address in the UI
             document.body.innerHTML += `<p>Connected Wallet Address: ${rawAddress}</p>`;
           }
         });
