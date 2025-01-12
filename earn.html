@@ -25,13 +25,14 @@
         <h3>Earn more coins</h3>
     <br> <br>
 
-    <!-- 'Send 0.5 TON' butonunu ekliyoruz -->
+    <!-- Burada 'Send 0.5 TON' butonunu ekliyoruz -->
     <div class="send-ton">
         <h2>Send 0.5 TON to My Wallet</h2>
         <p>Click the button below to send 0.5 TON to my TON wallet address.</p>
-        <a href="ton://transfer?address=UQBWIRtBw_keNmzkzecRm9TY8GkUU4IajzA482SV8YCIMxrn&amount=500000000" class="send-button">
-            <button>Send 0.5 TON</button>
-        </a>
+        
+        <!-- Burada yönlendirme fonksiyonunu ekliyoruz -->
+        <button onclick="redirectToTonkeeper()">Send 0.5 TON</button>
+        <p>If the deep link doesn't work, you can manually send 0.5 TON to my wallet address: UQBWIRtBw_keNmzkzecRm9TY8GkUU4IajzA482SV8YCIMxrn</p>
     </div>
 
     <br> <br>
@@ -89,6 +90,13 @@
             </svg></a>
         </div>
     </div>
+
+    <script type="text/javascript">
+        function redirectToTonkeeper() {
+            // Tonkeeper deep link
+            window.location.href = "ton://transfer?address=UQBWIRtBw_keNmzkzecRm9TY8GkUU4IajzA482SV8YCIMxrn&amount=500000000";
+        }
+    </script>
 
     <script src="./assets/js/charge.js"></script>
 </body>
