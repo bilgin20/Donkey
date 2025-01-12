@@ -9,24 +9,19 @@
     <meta name="theme-color" content="#f19e36" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="icon" type="image/x-icon" href="./assets/favicon/favicon.ico">
-
 </head>
 <body>
-
-    
     <div class="squad-container">
         <div class="login">
             <div class="login-detail">
                 <div class="profile">
                     <span></span>
                 </div>
-
                 <div class="user-data">
                     <span class="name"></span>
                     <span class="user-rank"></span>
                 </div>
             </div>
-
             <div>
                 <a href="login.html">
                     <svg width="30px" height="30px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -49,14 +44,15 @@
             <span></span>
             <img src="./assets/images/hamster.png" class="select-none" width="30px">
             <span id="rank" class="select-none">DonkeyTOKEN</span>
+            <div id="daily-reward" class="reward-message"></div> <!-- Günlük ödül mesajı -->
         </div>
     </div>
     
     <div class="coin-container">
-     
         <img src="./assets/images/hamster.png" id="coin" class="select-none" width="300px" />
     </div>
-<br><br><br>
+    <br><br><br>
+    
     <div class="menu-container">
         <div class="power">
             <img src="./assets/images/28.png" width="40px">
@@ -86,6 +82,24 @@
         <div class="progress"></div>
     </div>
 
+    <script>
+        const DAILY_REWARD = 1000;
+        const rewardMessage = document.getElementById('daily-reward');
+        
+        const lastLoginDate = localStorage.getItem('lastLoginDate');
+        const currentDate = new Date().toDateString(); 
+
+        if (lastLoginDate !== currentDate) {
+            let currentPoints = parseInt(localStorage.getItem('userPoints')) || 0;
+            currentPoints += DAILY_REWARD;
+            localStorage.setItem('userPoints', currentPoints);
+            localStorage.setItem('lastLoginDate', currentDate);
+
+            rewardMessage.innerText = `Günlük giriş ödülünüz: ${DAILY_REWARD} puan eklendi!`;
+        } else {
+            rewardMessage.innerText = `Bugünün ödülünü zaten aldınız. Toplam Puan: ${localStorage.getItem('userPoints')}`;
+        }
+    </script>
 
     <script src="./assets/js/main.js"></script>
 </body>
