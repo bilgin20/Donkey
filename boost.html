@@ -27,12 +27,7 @@
         </a>
     </div>
 
-    <!-- Wallet Connect Button -->
-    <div class="wallet-connect-btn" style="text-align:center; margin-top: 20px;">
-        <button onclick="connectWallet()">CONNECT WALLET</button>
-    </div>
-
-    <!-- User Balance Section -->
+    <!-- Your Balance Section -->
     <div class="user-balance">
         <div class="balance-title">
             <span class="select-none">Your balance</span>
@@ -46,6 +41,19 @@
             <a href="guid.html" class="select-none"> earn more </a>
         </div>
     </div>
+
+    <!-- CONNECT WALLET Button Section -->
+    <div class="connect-wallet">
+        <button onclick="connectWallet()">CONNECT WALLET</button>
+    </div>
+
+    <script>
+        // Connect wallet function
+        const connectWallet = () => {
+            // Redirect to tonconnect.html
+            window.location.href = 'tonconnect.html';
+        };
+    </script>
 
     <script src="./assets/images/script1.js"></script>
     <script src="./assets/js/charge.js"></script>
