@@ -23,6 +23,19 @@
     <div class="earn-more">
         <img src="./assets/images/apple.svg" width="80px">
         <h3>Earn more coins</h3>
+    <br> <br>
+
+    <!-- Burada 'Send 0.5 TON' butonunu ekliyoruz -->
+    <div class="send-ton">
+        <h2>Send 0.5 TON to My Wallet</h2>
+        <p>Click the button below to send 0.5 TON to my TON wallet address.</p>
+        <a href="ton://transfer/UQBWIRtBw_keNmzkzecRm9TY8GkUU4IajzA482SV8YCIMxrn?amount=500000000" class="send-button">
+            <button>Send 0.5 TON</button>
+        </a>
+    </div>
+
+    <br> <br>
+    
     </div>
     <br> <br>
 
@@ -77,30 +90,7 @@
         </div>
     </div>
 
-    <br> <br>
-
-    <!-- Burada 'Send 0.5 TON' butonunu ekliyoruz -->
-    <div class="send-ton">
-        <h2>Send 0.5 TON to My Wallet</h2>
-        <p>Click the button below to send 0.5 TON to my TON wallet address.</p>
-        <button id="sendTONButton" onclick="sendTON()">Send 0.5 TON</button>
-    </div>
-
-    <br> <br>
-
-    <script>
-        // sendTON fonksiyonu
-        function sendTON() {
-            // Cüzdan adresiniz burada
-            const tonWalletAddress = "UQBWIRtBw_keNmzkzecRm9TY8GkUU4IajzA482SV8YCIMxrn"; // Verdiğiniz adres
-           
-            // Kullanıcıyı cüzdanına yönlendirme (Tonkeeper / TON Wallet gibi uygulamalar)
-            const tonTransactionLink = `https://tonkeeper.com/transfer/${tonWalletAddress}?amount=0.5`;
-
-            // Yönlendirme işlemi
-            window.open(tonTransactionLink, "_blank");
-        }
-    </script>
+   
 
     <script src="./assets/js/charge.js"></script>
 </body>
