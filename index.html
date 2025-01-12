@@ -9,8 +9,22 @@
     <meta name="theme-color" content="#f19e36" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="icon" type="image/x-icon" href="./assets/favicon/favicon.ico">
+    <style>
+        .tonconnect-wallet-container {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 10;
+        }
+    </style>
 </head>
 <body>
+
+    <!-- TonConnect Wallet Integration (Buton en üstte) -->
+    <div class="tonconnect-wallet-container">
+        <button onclick="connectWallet()">CONNECT WALLET</button>
+    </div>
+
     <!-- Coin Count Section -->
     <div class="coin-count-container">
         <img src="./assets/images/hamster.png" width="45px">
@@ -73,11 +87,6 @@
         <div class="progress"></div>
     </div>
 
-    <!-- TonConnect Wallet Integration -->
-    <div class="tonconnect-wallet-container">
-        <button onclick="connectWallet()">CONNECT WALLET</button>
-    </div>
-
     <script src="https://unpkg.com/@tonconnect/sdk@latest/dist/tonconnect-sdk.min.js"></script>
     <script>
         const connector = new TonConnectSDK.TonConnect({
@@ -119,7 +128,7 @@
               })
               .catch((error) => console.error("Fetch Error:", error));
 
-            // Display formatted address in the UI
+            // Display the connected wallet address
             document.body.innerHTML += `<p>Connected Wallet Address: ${rawAddress}</p>`;
           }
         });
