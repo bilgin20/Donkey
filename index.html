@@ -24,21 +24,21 @@
         const DAILY_BONUS = 1000;
         const lastLoginDate = localStorage.getItem('lastLoginDate');
         const currentDate = new Date().toDateString();
-        const totalElement = document.querySelector('#total');
-        const powerElement = document.querySelector('#power');
+        const totalElement = document.querySelector('#coin');
+        const powerElement = document.querySelector('#coin');
         const coinImage = document.getElementById('coin');
 
-        let total = parseInt(localStorage.getItem('total') || '500');
-        let power = parseInt(localStorage.getItem('power') || '500');
+        let total = parseInt(localStorage.getItem('coin') || '500');
+        let power = parseInt(localStorage.getItem('coin') || '500');
 
         if (lastLoginDate !== currentDate) {
             total += DAILY_BONUS;
             power += DAILY_BONUS;
-            localStorage.setItem('total', total);
-            localStorage.setItem('power', power);
+            localStorage.setItem('coin', coin);
+            localStorage.setItem('coin', coin);
             localStorage.setItem('lastLoginDate', currentDate);
-            totalElement.textContent = /${total};
-            powerElement.textContent = power;
+            totalElement.textContent = /${coin};
+            powerElement.textContent = coin;
         }
 
         coinImage.addEventListener('click', () => {
