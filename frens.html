@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> - Frens</title>
+    <title>Invite Friends - Frens</title>
 
     <link rel="stylesheet" href="./assets/css/style.css">
     <link rel="stylesheet" href="./assets/css/responsive.css">
@@ -23,60 +23,67 @@
     </div>
 
     <div class="frens-main">
-
         <div class="frens-count">
             <span>Invite friends </span>
         </div>
+    </div>
 
-        
-
-            
-
-            
+    <div class="frens-help-box">
+        <div class="frens-help-content">
+            <div class="frens-help-image">
+                <img src="./assets/images/apple.svg" width="50px">
+            </div>
+            <div class="fren-help-text">
+                <h5>Invite 5 friends </h5>
+                <div>
+                    <img src="./assets/images/apple.svg" width="15px">
+                    <span>2,500</span>
+                </div>
+            </div>
+        </div>
+        <div class="frens-open-detail">
+            <a href="guid.html">Open details</a>
         </div>
     </div>
 
-
-    
-
-        <div class="frens-help-box">
-            <div class="frens-help-content">
-                <div class="frens-help-image">
-                    <img src="./assets/images/apple.svg" width="50px">
-                </div>
-                <div class="fren-help-text">
-                    <h5>Invite 5 friends </h5>
-                    <div>
-                        <img src="./assets/images/apple.svg" width="15px">
-                        <span>2,500</span>
-                       
-                    </div>
-                </div>
-            </div>
-
-            <div class="frens-open-detail">
-                <a href="guid.html">Open details</a>
-            </div>
-        </div>
-    </div>
     <div class="frens-help">
         <div class="frens-help-title">
             <h2>Invite friends and Earn Apple Coins! </h2><br>
             <h3>Here’s how it works:</h3><br>
             <span>Click the link to get started:</span><br>
-                <span>  Sign up and start exploring.</span><br>
-                    <span> Invite your friends using your own referral link.</span><br>
-                        <span> Earn Apple Coins with every new sign-up and invite!</span><br>
+            <span>Sign up and start exploring.</span><br>
+            <span>Invite your friends using your own referral link.</span><br>
+            <span>Earn Apple Coins with every new sign-up and invite!</span><br>
+            <div id="invitedFriends">
+                <h4>Invited Friends:</h4>
+                <ul id="friendsList">
+                    <!-- Invited friends will be listed here -->
+                </ul>
+            </div>
         </div>
- <div class="frens-invite">
-        <div class="frens-invite-button">
-            <input type="text" value="https://t.me/DonkeyToken_bot/donkeytoken" id="link" readonly>
-            <button id="copyButton">Copy Link</button>
+
+        <div class="frens-invite">
+            <div class="frens-invite-button">
+                <input type="text" value="https://t.me/DonkeyToken_bot/donkeytoken" id="link" readonly>
+                <button id="copyButton">Copy Link</button>
+            </div>
         </div>
     </div>
- 
-   <script src="./assets/js/js.js"></script>
-    <script src="./assets/js/charge.js"></script>
 
+    <script src="./assets/js/js.js"></script>
+    <script src="./assets/js/charge.js"></script>
+    <script>
+        const friendsList = document.getElementById('friendsList');
+
+        // Sample data of invited friends (replace with actual data retrieval logic)
+        const invitedFriends = ['Alice', 'Bob', 'Charlie', 'David', 'Eve'];
+
+        // Populate the list with friend names
+        invitedFriends.forEach((friend, index) => {
+            const listItem = document.createElement('li');
+            listItem.textContent = `${index + 1}. ${friend}`;
+            friendsList.appendChild(listItem);
+        });
+    </script>
 </body>
 </html>
