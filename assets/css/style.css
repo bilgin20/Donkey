@@ -689,12 +689,13 @@ button:active {
     margin-top: 10px;
 }
 <style>
-    /* TonConnect Wallet Button in the center of the top */
+    /* TonConnect Wallet Button */
     .tonconnect-wallet-container {
-        position: fixed;
-        top: 10px; /* Butonu biraz daha üst tarafa çekiyoruz */
+        position: absolute;
+        top: calc(100px + 10px); /* "DonkeyTOKEN" yazısından 10px altına */
         left: 50%;
         transform: translateX(-50%);
         z-index: 10;
     }
 </style>
+
