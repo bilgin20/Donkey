@@ -74,8 +74,6 @@
     <script src="./assets/js/charge.js"></script>
     <script>
         const friendsList = document.getElementById('friendsList');
-        const copyButton = document.getElementById('copyButton');
-        const linkInput = document.getElementById('link');
         let invitedFriends = JSON.parse(localStorage.getItem('invitedFriends')) || [];
 
         function saveFriends() {
@@ -99,25 +97,32 @@
             }
         }
 
-        function updateLinkWithFriendName(name) {
-            const baseUrl = "https://t.me/DonkeyToken_bot/donkeytoken";
-            linkInput.value = `${baseUrl}?name=${encodeURIComponent(name)}`;
+        // Get 'name' parameter from URL
+        function getQueryParam(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
         }
 
-        copyButton.addEventListener('click', () => {
+        document.addEventListener('DOMContentLoaded', () => {
+            const friendNameFromUrl = getQueryParam('name');
+            if (friendNameFromUrl) {
+                addFriend(decodeURIComponent(friendNameFromUrl));  // Add friend automatically from URL parameter
+            }
+            displayInvitedFriends();
+        });
+
+        // Copy the link to clipboard with friend info
+        document.getElementById('copyButton').addEventListener('click', () => {
             const friendName = prompt('Enter the name of the invited friend:');
             if (friendName) {
                 addFriend(friendName);
-                updateLinkWithFriendName(friendName);
+                const linkInput = document.getElementById('link');
+                const baseUrl = "https://t.me/DonkeyToken_bot/donkeytoken";
+                linkInput.value = `${baseUrl}?name=${encodeURIComponent(friendName)}`;
                 linkInput.select();
                 document.execCommand('copy');
                 alert(`Invite link copied with ${friendName}`);
             }
-        });
-
-        // Initialize the page with existing invited friends
-        document.addEventListener('DOMContentLoaded', () => {
-            displayInvitedFriends();
         });
     </script>
 </body>
