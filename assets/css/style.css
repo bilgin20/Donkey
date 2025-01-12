@@ -688,3 +688,13 @@ button:active {
     font-size: 18px;
     margin-top: 10px;
 }
+<style>
+    /* TonConnect Wallet Button in the center of the top */
+    .tonconnect-wallet-container {
+        position: fixed;
+        top: 10px; /* Butonu biraz daha üst tarafa çekiyoruz */
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 10;
+    }
+</style>
