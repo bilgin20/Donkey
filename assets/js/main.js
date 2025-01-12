@@ -11,35 +11,40 @@ const DAILY_BONUS = 1000;
 const lastLoginDate = localStorage.getItem('lastLoginDate');
 const currentDate = new Date().toDateString();
 
+// Günlük ödül ekleme işlemi
 if (lastLoginDate !== currentDate) {
-    total = Number(total || '0') + DAILY_BONUS;
-    localStorage.setItem('coin', total.toString());
-    localStorage.setItem('lastLoginDate', currentDate);
+    coins = Number(coins || '0') + DAILY_BONUS;  // Coins'e günlük bonusu ekliyoruz
+    localStorage.setItem('coins', coins.toString());  // coins'i güncelliyoruz
+    localStorage.setItem('lastLoginDate', currentDate);  // Son giriş tarihini kaydediyoruz
 }
 
-if(coins == null){
+// Eğer coins null ise, 0 olarak başlatıyoruz ve DOM'a yazdırıyoruz
+if (coins == null) {
     localStorage.setItem('coins', '0');
     h1.textContent = '0';
 } else {
-    h1.textContent = Number(coins).toLocaleString();
+    h1.textContent = Number(coins).toLocaleString();  // coins'i sayısal formatta gösteriyoruz
 }
 
-if(total == null){
+// Eğer total null ise, başlangıç değeri olarak 500 set ediyoruz
+if (total == null) {
     total = 500;
     localStorage.setItem('total', total.toString());
-    body.querySelector('#total').textContent = '/500';
+    body.querySelector('#total').textContent = '/500';  // Başlangıçta 500 olarak gösteriyoruz
 } else {
-    body.querySelector('#total').textContent = `/${total}`;
+    body.querySelector('#total').textContent = `/${total}`;  // total'ı DOM'a ekliyoruz
 }
 
-if(power == null){
+// power'ı kontrol ediyoruz
+if (power == null) {
     localStorage.setItem('power', '500');
     body.querySelector('#power').textContent = '500';
 } else {
     body.querySelector('#power').textContent = power;
 }
 
-if(count == null){
+// count değerini kontrol ediyoruz
+if (count == null) {
     localStorage.setItem('count', '1');
 }
 
@@ -52,20 +57,20 @@ image.addEventListener('click', (e) => {
     coins = localStorage.getItem('coins');
     power = localStorage.getItem('power');
     
-    if(Number(power) > 0) {
+    if (Number(power) > 0) {
         localStorage.setItem('coins', `${Number(coins) + 1}`);
         h1.textContent = `${(Number(coins) + 1).toLocaleString()}`;
         localStorage.setItem('power', `${Number(power) - 1}`);
         body.querySelector('#power').textContent = `${Number(power) - 1}`;
     }
 
-    if(x < 150 && y < 150){
+    if (x < 150 && y < 150) {
         image.style.transform = 'translate(-0.25rem, -0.25rem) skewY(-10deg) skewX(5deg)';
-    } else if (x < 150 && y > 150){
+    } else if (x < 150 && y > 150) {
         image.style.transform = 'translate(-0.25rem, 0.25rem) skewY(-10deg) skewX(5deg)';
-    } else if (x > 150 && y > 150){
+    } else if (x > 150 && y > 150) {
         image.style.transform = 'translate(0.25rem, 0.25rem) skewY(10deg) skewX(-5deg)';
-    } else if (x > 150 && y < 150){
+    } else if (x > 150 && y < 150) {
         image.style.transform = 'translate(0.25rem, -0.25rem) skewY(10deg) skewX(-5deg)';
     }
 
@@ -76,10 +81,11 @@ image.addEventListener('click', (e) => {
     body.querySelector('.progress').style.width = `${(100 * power) / total}%`;
 });
 
+// power'ı her saniye artırıyoruz ve progress bar'ı güncelliyoruz
 setInterval(() => {
     count = localStorage.getItem('count');
     power = localStorage.getItem('power');
-    if(Number(total) > power) {
+    if (Number(total) > power) {
         localStorage.setItem('power', `${Number(power) + Number(count)}`);
         body.querySelector('#power').textContent = `${Number(power) + Number(count)}`;
         body.querySelector('.progress').style.width = `${(100 * power) / total}%`;
