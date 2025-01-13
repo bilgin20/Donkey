@@ -18,6 +18,13 @@
             transform: translateX(-50%);
             z-index: 10;
         }
+        #wallet-address {
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 10px;
+            text-align: center;
+            color: #333;
+        }
     </style>
 </head>
 <body>
@@ -39,7 +46,8 @@
     
     <!-- TonConnect Wallet Integration - Button Just Below DonkeyTOKEN -->
     <div class="tonconnect-wallet-container">
-        <button onclick="connectWallet()">CONNECT WALLET</button>
+        <button id="connect-button" onclick="connectWallet()">CONNECT WALLET</button>
+        <p id="wallet-address" style="display:none;"></p>
     </div>
 
     <div class="coin-container">
@@ -50,12 +58,8 @@
     <div class="message-container">
         <div class="message-content">
             <h2>Message from the Lord of the Donkey:</h2>
-            <p>
-                Each visit per day gives you 1000 extra energy.
-            </p>
-            <p>
-                Airdrop Date: March 2025-April 2025
-            </p>
+            <p>Each visit per day gives you 1000 extra energy.</p>
+            <p>Airdrop Date: March 2025-April 2025</p>
         </div>
     </div>
     
@@ -91,48 +95,32 @@
     <!-- TonConnect Wallet Integration -->
     <script src="https://unpkg.com/@tonconnect/sdk@latest/dist/tonconnect-sdk.min.js"></script>
     <script>
+        const connectButton = document.getElementById('connect-button');
+        const walletAddressElement = document.getElementById('wallet-address');
+
         const connector = new TonConnectSDK.TonConnect({
-          manifestUrl:
-            "https://raw.githubusercontent.com/nuex001/Tonkeepermanifest/main/tonconnect-manifest.json",
+            manifestUrl: "https://raw.githubusercontent.com/nuex001/Tonkeepermanifest/main/tonconnect-manifest.json",
         });
 
         const connectWallet = () => {
-          const walletConnectionSource = {
-            universalLink: "https://app.tonkeeper.com/ton-connect",
-            bridgeUrl: "https://bridge.tonapi.io/bridge",
-          };
-
-          const universalLink = connector.connect(walletConnectionSource);
-          window.open(universalLink, "_blank");
+            const walletConnectionSource = {
+                universalLink: "https://app.tonkeeper.com/ton-connect",
+                bridgeUrl: "https://bridge.tonapi.io/bridge",
+            };
+            const universalLink = connector.connect(walletConnectionSource);
+            window.open(universalLink, "_blank");
         };
 
         connector.onStatusChange((status) => {
-          console.log("Connection status changed:", status);
-          if (status) {
-            const rawAddress = status.account.address;
-            // Convert raw address to base64 format
-            const apiUrl = `https://toncenter.com/api/v2/packAddress?address=${encodeURIComponent(
-              rawAddress
-            )}`;
-            fetch(apiUrl, {
-              method: "GET",
-              headers: {
-                accept: "application/json",
-              },
-            })
-              .then((response) => response.json())
-              .then((data) => {
-                if (data.ok) {
-                  console.log("Packed Address:", data.result);
-                } else {
-                  console.error("Error:", data);
-                }
-              })
-              .catch((error) => console.error("Fetch Error:", error));
+            console.log("Connection status changed:", status);
+            if (status) {
+                const rawAddress = status.account.address;
 
-            // Display formatted address in the UI
-            document.body.innerHTML += `<p>Connected Wallet Address: ${rawAddress}</p>`;
-          }
+                // UI Güncellemesi: Adresi Göster ve Butonu Gizle
+                walletAddressElement.style.display = 'block';
+                walletAddressElement.textContent = `Connected Wallet Address: ${rawAddress}`;
+                connectButton.style.display = 'none';
+            }
         });
     </script>
 
