@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="icon" type="image/x-icon" href="./assets/favicon/favicon.ico">
     <style>
-        /* TonConnect Wallet Button */
         .tonconnect-wallet-container {
             position: absolute;
             top: calc(100px + 50px); /* "DonkeyTOKEN" yazısından 50px altına */
@@ -28,13 +27,10 @@
     </style>
 </head>
 <body>
-
-    <!-- Coin Count Section -->
     <div class="coin-count-container">
         <img src="./assets/images/hamster.png" width="45px">
         <h1 class="select-none">0</h1>
     </div>
-
     <div class="rank-container">
         <div class="rank-items">
             <h3 class="select-none"></h3>
@@ -43,18 +39,13 @@
             <span id="rank" class="select-none">DonkeyTOKEN</span>
         </div>
     </div>
-    
-    <!-- TonConnect Wallet Integration - Button Just Below DonkeyTOKEN -->
     <div class="tonconnect-wallet-container">
         <button id="connect-button" onclick="connectWallet()">CONNECT WALLET</button>
         <p id="wallet-address" style="display:none;"></p>
     </div>
-
     <div class="coin-container">
         <img src="./assets/images/hamster.png" id="coin" class="select-none" width="300px" />
     </div>
-
-    <!-- Message from the Lord of the Donkey -->
     <div class="message-container">
         <div class="message-content">
             <h2>Message from the Lord of the Donkey:</h2>
@@ -62,7 +53,6 @@
             <p>Airdrop Date: March 2025-April 2025</p>
         </div>
     </div>
-    
     <div class="menu-container">
         <div class="power">
             <img src="./assets/images/28.png" width="40px">
@@ -71,7 +61,6 @@
                 <span class="gray select-none" id="total">/0</span>
             </div>
         </div>
-          
         <div class="menu-bottuns">
             <a href="frens.html" class="button b-r">
                 <img src="./assets/images/1.png" alt="" width="28px">
@@ -87,12 +76,9 @@
             </a>
         </div>
     </div>
-
     <div class="progress-bar">
         <div class="progress"></div>
     </div>
-
-    <!-- TonConnect Wallet Integration -->
     <script src="https://unpkg.com/@tonconnect/sdk@latest/dist/tonconnect-sdk.min.js"></script>
     <script>
         const connectButton = document.getElementById('connect-button');
@@ -115,15 +101,13 @@
             console.log("Connection status changed:", status);
             if (status) {
                 const rawAddress = status.account.address;
-
-                // UI Güncellemesi: Adresi Göster ve Butonu Gizle
+                const shortAddress = `${rawAddress.slice(0, 3)}...${rawAddress.slice(-3)}`;
                 walletAddressElement.style.display = 'block';
-                walletAddressElement.textContent = `Connected Wallet Address: ${rawAddress}`;
+                walletAddressElement.textContent = `Connected Wallet Address: ${shortAddress}`;
                 connectButton.style.display = 'none';
             }
         });
     </script>
-
     <script>
         const DAILY_BONUS = 1000;
         const clanButton = document.getElementById('clan');
