@@ -16,6 +16,116 @@
     <link rel="android-chrome-512x512" href="./assets/favicon/android-chrome-512x512.png" sizes="512x512">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+      <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Header styling */
+        .haeder {
+            padding: 10px;
+        }
+
+        .haeder a {
+            display: inline-block;
+            padding: 10px;
+            color: white;
+            text-decoration: none;
+        }
+
+        .haeder svg {
+            fill: white;
+        }
+
+        .user-balance {
+            text-align: center;
+            margin-top: 80px;
+        }
+
+        .balance-title {
+            font-size: 24px;
+            color: #fff;
+        }
+
+        .coin-count-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .balance-guid a {
+            color: #0077ff;
+            text-decoration: none;
+        }
+
+        .balance-guid a:hover {
+            color: #005bb5;
+        }
+
+        /* Modal window for wallet connection */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8); /* Transparent background */
+        }
+
+        .modal-content {
+            margin: 15% auto;
+            padding: 20px;
+            background: #1c1c1c;
+            color: #fff;
+            border-radius: 8px;
+            width: 300px;
+            text-align: center;
+        }
+
+        .close-btn {
+            color: #aaa;
+            float: right;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Footer styling */
+        footer {
+            background-color: #111;
+            padding: 20px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .tonconnect-wallet-container {
+            display: flex;
+            justify-content: center;
+            z-index: 100;
+        }
+
+        .tonconnect-wallet-container button {
+            background-color: #0077ff;
+            color: white;
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .tonconnect-wallet-container button:hover {
+            background-color: #005bb5;
+        }
+    </style>
 </head>
 <body class="boost">
 
