@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ton Connect Bağış Sistemi - Boosters</title>
+    <title>TON Wallet Connection - Boosters</title>
     <link rel="stylesheet" href="./assets/css/style.css">
     <link rel="stylesheet" href="./assets/css/responsive.css">
     <link rel="icon" type="image/x-icon" href="./assets/favicon/favicon.ico">
@@ -13,9 +13,9 @@
     <link rel="android-chrome-192x192" href="./assets/favicon/android-chrome-192x192.png" sizes="192x192">
     <link rel="android-chrome-512x512" href="./assets/favicon/android-chrome-512x512.png" sizes="512x512">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="./assets/css/w.css">
 </head>
 <body class="boost">
-    
     <div class="haeder">
         <a href="index.html">
             <svg width="25px" height="25px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -35,59 +35,31 @@
         </div>
         <br>
         <div class="balance-guid">
-            <a href="guid.html" class="select-none"> earn more </a>
+            <a href="guid.html" class="select-none">earn more</a>
+        </div>
+       
+        <!-- Open Wallet Pop-up Button -->
+        <button id="openModalBtn" class="open-button">Connect TON Wallet</button>
+
+        <!-- Modal Window -->
+        <div id="walletModal" class="modal">
+            <div class="modal-content">
+                <span class="close-btn">&times;</span>
+                <h2>Connect Your TON Wallet</h2>
+                <p>Please connect your Telegram TON wallet to continue.</p>
+
+                <div class="wallet-options">
+                    <button id="connectWallet" class="wallet-btn">Connect Wallet</button>
+                    <button id="cancelWallet" class="cancel-btn">Cancel</button>
+                </div>
+
+                <div id="statusMessage" class="status"></div>
+            </div>
         </div>
     </div>
 
-    <div class="ton-donation">
-        <h1>Ton Connect ile Bağış</h1>
-        <button id="connectWalletButton">Cüzdanı Bağla</button>
-        <button id="donateButton" style="display: none;">Bağış Yap</button>
-        <form action="save_donation.php" method="POST" id="donationForm" style="display: none;">
-            <input type="hidden" name="telegramUsername" id="telegramUsername">
-            <input type="hidden" name="walletAddress" id="walletAddress">
-            <label for="donationAmount">Bağış Miktarı (TON):</label>
-            <input type="text" name="donationAmount" id="donationAmount" required><br><br>
-            <button type="submit">Bağışı Tamamla</button>
-        </form>
-    </div>
+    <!-- External Scripts -->
+    <script src="./assets/js/wallet.js"></script> <!-- Buraya w.js dosyan覺z覺 ekleyin -->
 
-    <!-- TonConnect SDK -->
-    <script src="https://cdn.jsdelivr.net/npm/@tonconnect/sdk@latest/dist/sdk.min.js"></script>
-    <script>
-        const tonConnect = new TonConnect();
-        const adminWalletAddress = 'EQxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'; // Yönetici cüzdan adresi
-        let connectedWalletAddress = '';
-
-        document.getElementById('connectWalletButton').addEventListener('click', async () => {
-            try {
-                const wallet = await tonConnect.connect();
-                if (wallet) {
-                    connectedWalletAddress = wallet.account.address;
-                    document.getElementById('walletAddress').value = connectedWalletAddress;
-                    document.getElementById('connectWalletButton').style.display = 'none';
-                    document.getElementById('donateButton').style.display = 'block';
-                    alert(`Cüzdan bağlandı: ${connectedWalletAddress}`);
-                }
-            } catch (error) {
-                console.error('Cüzdan bağlama hatası:', error);
-                alert('Cüzdan bağlanırken bir hata oluştu.');
-            }
-        });
-
-        document.getElementById('donateButton').addEventListener('click', () => {
-            const telegramUsername = prompt('Telegram kullanıcı adınızı girin:');
-            if (telegramUsername) {
-                document.getElementById('telegramUsername').value = telegramUsername;
-                document.getElementById('donationForm').style.display = 'block';
-                document.getElementById('donateButton').style.display = 'none';
-            }
-        });
-    </script>
-
-    <script src="./assets/images/script1.js"></script>
-    <script src="./assets/js/charge.js"></script>
-    <script src="./assets/js/boost.js"></script>
-    <script src="./assets/js/main.js"></script>
 </body>
 </html>
