@@ -3,32 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TON Wallet Connection</title>
-    <link rel="stylesheet" href="material/css/w.css">
+    <title>- Boosters</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/responsive.css">
+    <link rel="stylesheet" href="./assets/css/w.css">
+
+    <link rel="icon" type="image/x-icon" href="./assets/favicon/favicon.ico">
+    <link rel="icon" type="image/png" href="./assets/favicon/favicon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="./assets/favicon/favicon-32x32.png" sizes="32x32">
+    <link rel="apple-touch-icon" href="./assets/favicon/apple-touch-icon.png">
+    <link rel="android-chrome-192x192" href="./assets/favicon/android-chrome-192x192.png" sizes="192x192">
+    <link rel="android-chrome-512x512" href="./assets/favicon/android-chrome-512x512.png" sizes="512x512">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 </head>
+<body class="boost">
+    
+    <div class="haeder">
+        <a href="index.html">
+            <svg width="25px" height="25px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M22 11.9299H2" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M8.00009 19L2.84009 14C2.5677 13.7429 2.35071 13.433 2.20239 13.0891C2.05407 12.7452 1.97754 12.3745 1.97754 12C1.97754 11.6255 2.05407 11.2548 2.20239 10.9109C2.35071 10.567 2.5677 10.2571 2.84009 10L8.00009 5" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </a>
+    </div>
 
-<body>
-
-    <!-- Open Wallet Pop-up Button -->
-    <button id="openModalBtn" class="open-button">Connect TON Wallet</button>
-   
-  
-    <!-- Modal Window -->
-    <div id="walletModal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn">&times;</span>
-            <h2>Connect Your TON Wallet</h2>
-            <p>Please connect your Telegram TON wallet to continue.</p>
-
-            <div class="wallet-options">
-                <button id="connectWallet" class="wallet-btn">Connect Wallet</button>
-                <button id="cancelWallet" class="cancel-btn">Cancel</button>
-            </div>
-
-            <div id="statusMessage" class="status"></div>
+    <div class="user-balance">
+        <div class="balance-title">
+            <span class="select-none">Your balance</span>
+        </div>
+        <div class="coin-count-container">
+            <img src="./assets/images/apple.svg" width="45px">
+            <h1 class="select-none"></h1>
+        </div>
+        <br>
+        <div class="balance-guid">
+            <a href="guid.html" class="select-none"> earn more </a>
         </div>
     </div>
 
-    <script src="material/js/w.js"></script>
+   <!-- Open Wallet Pop-up Button -->
+       
+        <!-- TonConnect Wallet Integration -->
+            <div class="tonconnect-wallet-container">
+                <button onclick="connectWallet()">CONNECT WALLET</button>
+            </div>
+        
+            <script src="https://unpkg.com/@tonconnect/sdk@latest/dist/tonconnect-sdk.min.js"></script>
+            <script>
+                const connector = new TonConnectSDK.TonConnect({
+                  manifestUrl:
+                    "https://raw.githubusercontent.com/nuex001/Tonkeepermanifest/main/tonconnect-manifest.json",
+                });
+        
+                const connectWallet = () => {
+                  const walletConnectionSource = {
+                    universalLink: "https://app.tonkeeper.com/ton-connect",
+                    bridgeUrl: "https://bridge.tonapi.io/bridge", // Bridge URL ile bağlantı sağlanır
+                  };
+        
+                  const universalLink = connector.connect(walletConnectionSource);
+                  window.open(universalLink, "_blank");
+                };
+        
+                connector.onStatusChange((status) => {
+                  if (status) {
+                    const rawAddress = status.account.address;  // Cüzdan adresi alındı
+                    console.log("Bağlı Cüzdan Adresi:", rawAddress);
+
+                    // Bağış işlemi yapılacak adres (sizin adresiniz)
+                    const donationAddress = "eewrrefcddceferferferfedcdcer445545"; // Buraya kendi cüzdan adresinizi yazdım
+
+                    // Bağış miktarını belirleyin (örneğin 1 TON)
+                    const donationAmount = "1";  // 1 TON gönderecek
+
+                    // Bağış için işlemi başlatma
+                    sendDonation(donationAddress, donationAmount);
+                  }
+                });
+
+                // Bağış gönderme fonksiyonu
+                const sendDonation = (toAddress, amount) => {
+                  const donationTransaction = {
+                    from: connector.account.address,  // Bağlantıdaki cüzdan adresi
+                    to: toAddress,  // Bağış yapılacak adres
+                    amount: amount,  // Gönderilecek miktar (TON cinsinden)
+                  };
+
+                  // Burada işlem verisini işleme sokabiliriz (API üzerinden veya doğrudan TonConnect SDK ile)
+                  console.log(`Bağış Gönderildi: ${donationTransaction.amount} TON`);
+                };
+            </script>
+
+    <script src="./assets/js/wallet.js"></script>
+    <script src="./assets/images/script1.js"></script>
+    <script src="./assets/js/charge.js"></script>
+    <script src="./assets/js/boost.js"></script>
+    <script src="./assets/js/main.js"></script>
 </body>
 </html>
