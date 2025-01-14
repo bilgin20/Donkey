@@ -17,9 +17,110 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* CONNECT WALLET button at the top */
+        .tonconnect-wallet-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .tonconnect-wallet-container button {
+            background-color: #0077ff;
+            color: white;
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .tonconnect-wallet-container button:hover {
+            background-color: #005bb5;
+        }
+
+        /* Header styling */
+        .haeder {
+            padding: 10px;
+        }
+
+        .haeder a {
+            display: inline-block;
+            padding: 10px;
+            color: white;
+            text-decoration: none;
+        }
+
+        .haeder svg {
+            fill: white;
+        }
+
+        .user-balance {
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .balance-title {
+            font-size: 24px;
+            color: #fff;
+        }
+
+        .coin-count-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .balance-guid a {
+            color: #0077ff;
+            text-decoration: none;
+        }
+
+        .balance-guid a:hover {
+            color: #005bb5;
+        }
+
+        /* Modal window for wallet connection */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8); /* Transparent background */
+        }
+
+        .modal-content {
+            margin: 15% auto;
+            padding: 20px;
+            background: #1c1c1c;
+            color: #fff;
+            border-radius: 8px;
+            width: 300px;
+            text-align: center;
+        }
+
+        .close-btn {
+            color: #aaa;
+            float: right;
+            font-size: 24px;
+            cursor: pointer;
+        }
+    </style>
+
 </head>
 <body class="boost">
-    
     <div class="haeder">
         <a href="index.html">
             <svg width="25px" height="25px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -27,7 +128,11 @@
                 <path d="M8.00009 19L2.84009 14C2.5677 13.7429 2.35071 13.433 2.20239 13.0891C2.05407 12.7452 1.97754 12.3745 1.97754 12C1.97754 11.6255 2.05407 11.2548 2.20239 10.9109C2.35071 10.567 2.5677 10.2571 2.84009 10L8.00009 5" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
         </a>
-       
+    </div>
+
+    <!-- Wallet Button -->
+    <div class="tonconnect-wallet-container">
+        <button onclick="connectWallet()">CONNECT WALLET</button>
     </div>
 
     <div class="user-balance">
@@ -44,75 +149,31 @@
         </div>
     </div>
 
-   <!-- Open Wallet Pop-up Button -->
-       
-        <!-- TonConnect Wallet Integration -->
-            <div class="tonconnect-wallet-container">
-                <button onclick="connectWallet()">CONNECT WALLET</button>
-            </div>
-        
-            <script src="https://unpkg.com/@tonconnect/sdk@latest/dist/tonconnect-sdk.min.js"></script>
-            <script>
-                const connector = new TonConnectSDK.TonConnect({
-                  manifestUrl:
-                    "https://raw.githubusercontent.com/nuex001/Tonkeepermanifest/main/tonconnect-manifest.json",
-                });
-        
-                const connectWallet = () => {
-                  const walletConnectionSource = {
-                    universalLink: "https://app.tonkeeper.com/ton-connect",
-                    bridgeUrl: "https://bridge.tonapi.io/bridge",
-                  };
-        
-                  const universalLink = connector.connect(walletConnectionSource);
-                  window.open(universalLink, "_blank");
-                };
-        
-                connector.onStatusChange((status) => {
-                  console.log("Connection status changed:", status);
-                  if (status) {
-                    const rawAddress = status.account.address;
-                    // Convert raw address to base64 format
-                    const apiUrl = `https://toncenter.com/api/v2/packAddress?address=${encodeURIComponent(
-                      rawAddress
-                    )}`;
-                    fetch(apiUrl, {
-                      method: "GET",
-                      headers: {
-                        accept: "application/json",
-                      },
-                    })
-                      .then((response) => response.json())
-                      .then((data) => {
-                        if (data.ok) {
-                          console.log("Packed Address:", data.result);
-                        } else {
-                          console.error("Error:", data);
-                        }
-                      })
-                      .catch((error) => console.error("Fetch Error:", error));
-        
-                    // Display formatted address in the UI
-                    document.body.innerHTML += `<p>Connected Wallet Address: ${rawAddress}</p>`;
-                  }
-                });
-            </script>
-                <!-- Modal Window -->
-                <div id="walletModal" class="modal">
-                    <div class="modal-content">
-                        <span class="close-btn">&times;</span>
-                        <h2>Connect Your TON Wallet</h2>
-                        <p>Please connect your Telegram TON wallet to continue.</p>
-        
-                        <div class="wallet-options">
-                            <button id="connectWallet" class="wallet-btn">Connect Wallet</button>
-                            <button id="cancelWallet" class="cancel-btn">Cancel</button>
-                        </div>
-        
-                        <div id="statusMessage" class="status"></div>
-                    </div>
-                </div>
-            </div>
+    <!-- TonConnect Wallet Integration -->
+    <script src="https://unpkg.com/@tonconnect/sdk@latest/dist/tonconnect-sdk.min.js"></script>
+    <script>
+        const connector = new TonConnectSDK.TonConnect({
+            manifestUrl: "https://raw.githubusercontent.com/nuex001/Tonkeepermanifest/main/tonconnect-manifest.json",
+        });
+
+        const connectWallet = () => {
+            const walletConnectionSource = {
+                universalLink: "https://app.tonkeeper.com/ton-connect",
+                bridgeUrl: "https://bridge.tonapi.io/bridge",
+            };
+
+            const universalLink = connector.connect(walletConnectionSource);
+            window.open(universalLink, "_blank");
+        };
+
+        connector.onStatusChange((status) => {
+            console.log("Connection status changed:", status);
+            if (status) {
+                const rawAddress = status.account.address;
+                document.body.innerHTML += `<p>Connected Wallet Address: ${rawAddress}</p>`;
+            }
+        });
+    </script>
 
     <script src="./assets/js/wallet.js"></script>
     <script src="./assets/images/script1.js"></script>
