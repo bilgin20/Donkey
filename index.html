@@ -9,28 +9,14 @@
     <meta name="theme-color" content="#f19e36" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="icon" type="image/x-icon" href="./assets/favicon/favicon.ico">
-    <style>
-        .tonconnect-wallet-container {
-            position: absolute;
-            top: calc(100px + 50px); /* "DonkeyTOKEN" yazısından 50px altına */
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 10;
-        }
-        #wallet-address {
-            font-size: 16px;
-            font-weight: bold;
-            margin-top: 10px;
-            text-align: center;
-            color: #333;
-        }
-    </style>
 </head>
 <body>
+    <!-- Coin Count Section -->
     <div class="coin-count-container">
         <img src="./assets/images/hamster.png" width="45px">
         <h1 class="select-none">0</h1>
     </div>
+
     <div class="rank-container">
         <div class="rank-items">
             <h3 class="select-none"></h3>
@@ -39,20 +25,25 @@
             <span id="rank" class="select-none">DonkeyTOKEN</span>
         </div>
     </div>
-    <div class="tonconnect-wallet-container">
-        <button id="connect-button" onclick="connectWallet()">CONNECT WALLET</button>
-        <p id="wallet-address" style="display:none;"></p>
-    </div>
+    
     <div class="coin-container">
         <img src="./assets/images/hamster.png" id="coin" class="select-none" width="300px" />
     </div>
+
+    <!-- Message from the Lord of the Donkey -->
     <div class="message-container">
         <div class="message-content">
             <h2>Message from the Lord of the Donkey:</h2>
-            <p>Each visit per day gives you 1000 extra energy.</p>
-            <p>Airdrop Date: March 2025-April 2025</p>
+            <p>
+               Hey Donkey, now it's time to get started, play games, complete missions and make sure Donkey gets the biggest share of the airdrop!
+                Each visit per day gives you 1000 extra energy.
+            </p>
+            <p>
+                Airdrop Date: March 2025-April 2025
+            </p>
         </div>
     </div>
+    
     <div class="menu-container">
         <div class="power">
             <img src="./assets/images/28.png" width="40px">
@@ -61,6 +52,7 @@
                 <span class="gray select-none" id="total">/0</span>
             </div>
         </div>
+          
         <div class="menu-bottuns">
             <a href="frens.html" class="button b-r">
                 <img src="./assets/images/1.png" alt="" width="28px">
@@ -76,38 +68,11 @@
             </a>
         </div>
     </div>
+
     <div class="progress-bar">
         <div class="progress"></div>
     </div>
-    <script src="https://unpkg.com/@tonconnect/sdk@latest/dist/tonconnect-sdk.min.js"></script>
-    <script>
-        const connectButton = document.getElementById('connect-button');
-        const walletAddressElement = document.getElementById('wallet-address');
 
-        const connector = new TonConnectSDK.TonConnect({
-            manifestUrl: "https://raw.githubusercontent.com/nuex001/Tonkeepermanifest/main/tonconnect-manifest.json",
-        });
-
-        const connectWallet = () => {
-            const walletConnectionSource = {
-                universalLink: "https://app.tonkeeper.com/ton-connect",
-                bridgeUrl: "https://bridge.tonapi.io/bridge",
-            };
-            const universalLink = connector.connect(walletConnectionSource);
-            window.open(universalLink, "_blank");
-        };
-
-        connector.onStatusChange((status) => {
-            console.log("Connection status changed:", status);
-            if (status) {
-                const rawAddress = status.account.address;
-                const shortAddress = `${rawAddress.slice(0, 3)}...${rawAddress.slice(-3)}`;
-                walletAddressElement.style.display = 'block';
-                walletAddressElement.textContent = `Connected Wallet Address: ${shortAddress}`;
-                connectButton.style.display = 'none';
-            }
-        });
-    </script>
     <script>
         const DAILY_BONUS = 1000;
         const clanButton = document.getElementById('clan');
