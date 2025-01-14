@@ -1,214 +1,213 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>- Boosters</title>
-    <link rel="stylesheet" href="./assets/css/style.css">
-    <link rel="stylesheet" href="./assets/css/responsive.css">
-    <link rel="stylesheet" href="./assets/css/w.css">
-
-    <link rel="icon" type="image/x-icon" href="./assets/favicon/favicon.ico">
-    <link rel="icon" type="image/png" href="./assets/favicon/favicon-16x16.png" sizes="16x16">
-    <link rel="icon" type="image/png" href="./assets/favicon/favicon-32x32.png" sizes="32x32">
-    <link rel="apple-touch-icon" href="./assets/favicon/apple-touch-icon.png">
-    <link rel="android-chrome-192x192" href="./assets/favicon/android-chrome-192x192.png" sizes="192x192">
-    <link rel="android-chrome-512x512" href="./assets/favicon/android-chrome-512x512.png" sizes="512x512">
-
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>- Güçlendiriciler</title>
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <link rel="stylesheet" href="./assets/css/responsive.css" />
+    <link rel="stylesheet" href="./assets/css/w.css" />
+    <link rel="icon" type="image/x-icon" href="./assets/favicon/favicon.ico" />
+    <link rel="icon" type="image/png" href="./assets/favicon/favicon-16x16.png" sizes="16x16" />
+    <link rel="icon" type="image/png" href="./assets/favicon/favicon-32x32.png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="./assets/favicon/apple-touch-icon.png" />
+    <link rel="android-chrome-192x192" href="./assets/favicon/android-chrome-192x192.png" sizes="192x192" />
+    <link rel="android-chrome-512x512" href="./assets/favicon/android-chrome-512x512.png" sizes="512x512" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #000;
-            color: #fff;
-            margin: 0;
-            padding: 0;
-        }
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #000;
+        color: #fff;
+        margin: 0;
+        padding: 0;
+      }
 
-        /* Header styling */
-        .haeder {
-            padding: 10px;
-        }
+      .header {
+        padding: 10px;
+      }
 
-        .haeder a {
-            display: inline-block;
-            padding: 10px;
-            color: white;
-            text-decoration: none;
-        }
+      .one {
+        display: inline-block;
+        padding: 10px;
+        color: white;
+        text-decoration: none;
+      }
 
-        .haeder svg {
-            fill: white;
-        }
+      .header svg {
+        fill: white;
+      }
 
-        .user-balance {
-            text-align: center;
-            margin-top: 80px;
-        }
+      .user-balance {
+        text-align: center;
+        margin-top: 80px;
+      }
 
-        .balance-title {
-            font-size: 24px;
-            color: #fff;
-        }
+      .balance-title {
+        font-size: 24px;
+        color: #fff;
+      }
 
-        .coin-count-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
+      .coin-count-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+      }
 
-        .balance-guid a {
-            color: #0077ff;
-            text-decoration: none;
-        }
+      .balance-guid a {
+        color: #0077ff;
+        text-decoration: none;
+      }
 
-        .balance-guid a:hover {
-            color: #005bb5;
-        }
+      .balance-guid a:hover {
+        color: #005bb5;
+      }
 
-        /* Modal window for wallet connection */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8); /* Transparent background */
-        }
+      /* Modal for wallet connection */
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+      }
 
-        .modal-content {
-            margin: 15% auto;
-            padding: 20px;
-            background: #1c1c1c;
-            color: #fff;
-            border-radius: 8px;
-            width: 300px;
-            text-align: center;
-        }
+      .modal-content {
+        margin: 15% auto;
+        padding: 20px;
+        background: #1c1c1c;
+        color: #fff;
+        border-radius: 8px;
+        width: 300px;
+        text-align: center;
+      }
 
-        .close-btn {
-            color: #aaa;
-            float: right;
-            font-size: 24px;
-            cursor: pointer;
-        }
+      .close-btn {
+        color: #aaa;
+        float: right;
+        font-size: 24px;
+        cursor: pointer;
+      }
 
-        /* Footer styling */
-        footer {
-            background-color: #111;
-            padding: 20px;
-            text-align: center;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-        }
+      /* Footer styles */
+      footer {
+        background-color: #111;
+        padding: 20px;
+        text-align: center;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+      }
 
-        .tonconnect-wallet-container {
-            display: flex;
-            justify-content: center;
-            z-index: 100;
-        }
+      .tonconnect-wallet-container {
+        display: flex;
+        justify-content: center;
+        z-index: 100;
+      }
 
-        .tonconnect-wallet-container button {
-            background-color: #0077ff;
-            color: white;
-            padding: 15px 30px;
-            font-size: 18px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
+      .tonconnect-wallet-container button {
+        background-color: #0077ff;
+        color: white;
+        padding: 15px 30px;
+        font-size: 18px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
 
-        .tonconnect-wallet-container button:hover {
-            background-color: #005bb5;
-        }
+      .tonconnect-wallet-container button:hover {
+        background-color: #005bb5;
+      }
     </style>
-</head>
-<body class="boost">
+  </head>
 
-    <div class="haeder">
-        <a href="index.html">
-            <svg width="25px" height="25px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M22 11.9299H2" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M8.00009 19L2.84009 14C2.5677 13.7429 2.35071 13.433 2.20239 13.0891C2.05407 12.7452 1.97754 12.3745 1.97754 12C1.97754 11.6255 2.05407 11.2548 2.20239 10.9109C2.35071 10.567 2.5677 10.2571 2.84009 10L8.00009 5" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-        </a>
+  <body class="boost">
+    <div class="header">
+      <a href="index.html">
+        <svg width="25px" height="25px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M22 11.9299H2" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          <path d="M8.00009 19L2.84009 14C2.5677 13.7429 2.35071 13.433 2.20239 13.0891C2.05407 12.7452 1.97754 12.3745 1.97754 12C1.97754 11.6255 2.05407 11.2548 2.20239 10.9109C2.35071 10.567 2.5677 10.2571 2.84009 10L8.00009 5" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </a>
     </div>
+
     <div class="user-balance">
-        <div class="balance-title">
-            <span class="select-none">Your balance</span>
-        </div>
-        <div class="coin-count-container">
-            <img src="./assets/images/apple.svg" width="45px">
-            <h1 class="select-none" id="walletAddressDisplay">CONNECT WALLET</h1>
-        </div>
-        <br>
-        <div class="balance-guid">
-            <a href="guid.html" class="select-none"> earn more </a>
-        </div>
+      <div class="balance-title">
+        <span class="select-none">Bakiyeniz</span>
+      </div>
+
+      <div class="coin-count-container">
+        <img src="./assets/images/apple.svg" width="45px" />
+        <h1 class="select-none" id="walletAddressDisplay">CÜZDANI BAĞLA</h1>
+      </div>
+      <br />
+
+      <div class="balance-guid">
+        <a href="guid.html" class="select-none"> daha fazla kazan </a>
+      </div>
     </div>
-    <!-- Sayfa içeriği burada yer alacak. -->
-    
-    <!-- Footer kısmında cüzdan bağlantısı ve adresi -->
+
+    <!-- Footer section with wallet connection and address -->
     <footer>
-        <div class="tonconnect-wallet-container">
-          
-            <button id="connectButton" onclick="connectWallet()">CONNECT WALLET</button>
-        </div>
+      <div class="tonconnect-wallet-container">
+        <button id="connectButton" onclick="connectWallet()">CÜZDANI BAĞLA</button>
+      </div>
     </footer>
 
     <!-- TonConnect Wallet Integration -->
     <script src="https://unpkg.com/@tonconnect/sdk@latest/dist/tonconnect-sdk.min.js"></script>
     <script>
-        const connector = new TonConnectSDK.TonConnect({
-            manifestUrl: "https://bilgin20.github.io/Donkey/tonconnect-manifest.json",
-        });
+      const connector = new TonConnectSDK.TonConnect({
+        manifestUrl: "https://bilgin20.github.io/Donkey/tonconnect-manifest.json",
+      });
 
-        const connectWallet = () => {
-            const walletConnectionSource = {
-                universalLink: "https://app.tonkeeper.com/ton-connect",
-                bridgeUrl: "https://bridge.tonapi.io/bridge",
-            };
-
-            const universalLink = connector.connect(walletConnectionSource);
-            window.open(universalLink, "_blank");
+      const connectWallet = () => {
+        const walletConnectionSource = {
+          universalLink: "https://app.tonkeeper.com/ton-connect",
+          bridgeUrl: "https://bridge.tonapi.io/bridge",
         };
 
-        // Kısaltılmış adresi formatlamak
-        function formatWalletAddress(address) {
-            return address.substring(0, 3) + "..." + address.substring(address.length - 3);
+        const universalLink = connector.connect(walletConnectionSource);
+        window.open(universalLink, "_blank");
+      };
+
+      // Format wallet address (show first 3, last 3 characters)
+      function formatWalletAddress(address) {
+        return `💳 ${address.slice(0, 6)}···${address.slice(-4)} ✅`;
+      }
+
+      // Wallet connection status
+      connector.onStatusChange((status) => {
+        console.log("Bağlantı durumu değişti:", status);
+        if (status) {
+          const rawAddress = status.account.address;
+
+          // Format wallet address
+          const formattedAddress = formatWalletAddress(rawAddress);
+
+          // Display wallet address on screen
+          document.getElementById("walletAddressDisplay").textContent = formattedAddress;
+
+          // Save wallet address to localStorage
+          localStorage.setItem("walletAddress", formattedAddress);
+
+          // Hide the connect button
+          document.getElementById("connectButton").style.display = 'none';
         }
+      });
 
-        // Cüzdan bağlantısı durumu
-        connector.onStatusChange((status) => {
-            console.log("Connection status changed:", status);
-            if (status) {
-                const rawAddress = status.account.address;
-
-                // Cüzdan adresini kısaltarak göster
-                const formattedAddress = formatWalletAddress(rawAddress);
-
-                // Cüzdan adresini ekrana yazdır
-                document.getElementById("walletAddressDisplay").textContent = formattedAddress;
-
-                // Cüzdan adresini sakla
-                localStorage.setItem("walletAddress", formattedAddress);
-                // Butonu gizle
-                document.getElementById("connectButton").style.display = 'none';
-            }
-        });
-
-        // Sayfa yüklendiğinde daha önce bağlanmış bir adres varsa, cüzdan adresini göster
-        window.onload = () => {
-            const savedAddress = localStorage.getItem("walletAddress");
-            if (savedAddress) {
-                document.getElementById("walletAddressDisplay").textContent = savedAddress;
-                document.getElementById("connectButton").style.display = 'none';
-            }
-        };
+      // On page load, check if a wallet address is saved
+      window.onload = () => {
+        const savedAddress = localStorage.getItem("walletAddress");
+        if (savedAddress) {
+          document.getElementById("walletAddressDisplay").textContent = savedAddress;
+          document.getElementById("connectButton").style.display = 'none';
+        }
+      };
     </script>
 
     <script src="./assets/js/wallet.js"></script>
@@ -216,5 +215,5 @@
     <script src="./assets/js/charge.js"></script>
     <script src="./assets/js/boost.js"></script>
     <script src="./assets/js/main.js"></script>
-</body>
+  </body>
 </html>
