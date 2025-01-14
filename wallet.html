@@ -4,7 +4,70 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TON Wallet Connection - Boosters</title>
-    <style>
+</head>
+<body class="boost">
+    <header>
+        <a href="index.html" aria-label="Back to home">
+            <svg width="25px" height="25px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M22 11.9299H2" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M8.00009 19L2.84009 14C2.5677 13.7429 2.35071 13.433 2.20239 13.0891C2.05407 12.7452 1.97754 12.3745 1.97754 12C1.97754 11.6255 2.05407 11.2548 2.20239 10.9109C2.35071 10.567 2.5677 10.2571 2.84009 10L8.00009 5" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </a>
+    </header>
+
+    <div class="wallet-container">
+        <div class="tonconnect-wallet-container">
+            <button onclick="connectWallet()" class="connect-btn">CONNECT WALLET</button>
+        </div>
+        <div id="walletModal" class="modal">
+            <div class="modal-content">
+                <span class="close-btn">&times;</span>
+                <h2>Connect Your TON Wallet</h2>
+                <p>Please connect your Telegram TON wallet to continue.</p>
+                <div class="wallet-options">
+                    <button id="connectWallet" class="wallet-btn">Connect Wallet</button>
+                    <button id="cancelWallet" class="cancel-btn">Cancel</button>
+                </div>
+                <div id="statusMessage" class="status"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="user-balance">
+        <h1 class="balance-title select-none">Your balance</h1>
+        <div class="coin-count-container">
+            <img src="./assets/images/apple.svg" alt="Coin balance icon" width="45px">
+            <h1 class="select-none">0</h1>
+        </div>
+        <div class="balance-guid">
+            <a href="guid.html" class="select-none">Earn more</a>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/@tonconnect/sdk@latest/dist/tonconnect-sdk.min.js"></script>
+    <script>
+        const connector = new TonConnectSDK.TonConnect({
+            manifestUrl: "https://raw.githubusercontent.com/nuex001/Tonkeepermanifest/main/tonconnect-manifest.json",
+        });
+
+        const connectWallet = () => {
+            const walletConnectionSource = {
+                universalLink: "https://app.tonkeeper.com/ton-connect",
+                bridgeUrl: "https://bridge.tonapi.io/bridge",
+            };
+            const universalLink = connector.connect(walletConnectionSource);
+            window.open(universalLink, "_blank");
+        };
+
+        connector.onStatusChange((status) => {
+            console.log("Connection status changed:", status);
+            if (status) {
+                const rawAddress = status.account.address;
+                document.body.innerHTML += `<p>Connected Wallet Address: ${rawAddress}</p>`;
+            }
+        });
+    </script>
+     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #000; /* Arka plan siyah */
@@ -101,68 +164,5 @@
             color: #005bb5;
         }
     </style>
-</head>
-<body class="boost">
-    <header>
-        <a href="index.html" aria-label="Back to home">
-            <svg width="25px" height="25px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M22 11.9299H2" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M8.00009 19L2.84009 14C2.5677 13.7429 2.35071 13.433 2.20239 13.0891C2.05407 12.7452 1.97754 12.3745 1.97754 12C1.97754 11.6255 2.05407 11.2548 2.20239 10.9109C2.35071 10.567 2.5677 10.2571 2.84009 10L8.00009 5" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-        </a>
-    </header>
-
-    <div class="wallet-container">
-        <div class="tonconnect-wallet-container">
-            <button onclick="connectWallet()" class="connect-btn">CONNECT WALLET</button>
-        </div>
-        <div id="walletModal" class="modal">
-            <div class="modal-content">
-                <span class="close-btn">&times;</span>
-                <h2>Connect Your TON Wallet</h2>
-                <p>Please connect your Telegram TON wallet to continue.</p>
-                <div class="wallet-options">
-                    <button id="connectWallet" class="wallet-btn">Connect Wallet</button>
-                    <button id="cancelWallet" class="cancel-btn">Cancel</button>
-                </div>
-                <div id="statusMessage" class="status"></div>
-            </div>
-        </div>
-    </div>
-
-    <div class="user-balance">
-        <h1 class="balance-title select-none">Your balance</h1>
-        <div class="coin-count-container">
-            <img src="./assets/images/apple.svg" alt="Coin balance icon" width="45px">
-            <h1 class="select-none">0</h1>
-        </div>
-        <div class="balance-guid">
-            <a href="guid.html" class="select-none">Earn more</a>
-        </div>
-    </div>
-
-    <script src="https://unpkg.com/@tonconnect/sdk@latest/dist/tonconnect-sdk.min.js"></script>
-    <script>
-        const connector = new TonConnectSDK.TonConnect({
-            manifestUrl: "https://raw.githubusercontent.com/nuex001/Tonkeepermanifest/main/tonconnect-manifest.json",
-        });
-
-        const connectWallet = () => {
-            const walletConnectionSource = {
-                universalLink: "https://app.tonkeeper.com/ton-connect",
-                bridgeUrl: "https://bridge.tonapi.io/bridge",
-            };
-            const universalLink = connector.connect(walletConnectionSource);
-            window.open(universalLink, "_blank");
-        };
-
-        connector.onStatusChange((status) => {
-            console.log("Connection status changed:", status);
-            if (status) {
-                const rawAddress = status.account.address;
-                document.body.innerHTML += `<p>Connected Wallet Address: ${rawAddress}</p>`;
-            }
-        });
-    </script>
 </body>
 </html>
