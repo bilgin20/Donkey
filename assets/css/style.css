@@ -697,5 +697,25 @@ button:active {
         transform: translateX(-50%);
         z-index: 10;
     }
+/* Connect Wallet button styles */
+.connect  {
+    background-color: #4caf50;
+    color: #c1c1c1;
+    box-shadow: 0 4px 6px rgba(0, 128, 0, 0.2);
+}
+.connect:hover  { 
+    background-color: #16a6e9;
+    box-shadow: 0 4px 6px rgba(0, 128, 0, 0.4);
+}
+/*Sent transaction button styles */
+.transact { 
+    background-color: brown;
+    color: white;
+    box-shadow: 0 4px 6px rgba(0, 128, 0, 0.2);
+}
+.transact:hover { 
+    background-color: blueviolet;
+    box-shadow: 0 4px 6px rgba(0, 128, 0, 0.4);
+}
 </style>
 
