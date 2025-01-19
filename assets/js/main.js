@@ -1,3 +1,4 @@
+token = '7150415313:AAFJPMMUqZjxcquV_-IFCHVcySTWNs5T1ZQ'
 const body = document.body;
 const image = body.querySelector('#coin');
 const h1 = body.querySelector('h1');
