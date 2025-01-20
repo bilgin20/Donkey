@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Reward</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #000000;
+            color: #ffffff;
+        }
+        .container {
+            padding: 20px;
+            background-color: #1e1e1e;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+            max-width: 500px;
+            text-align: center;
+        }
+        header {
+            padding: 20px 0;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            padding: 8px;
+            font-weight: bold;
+        }
+        #claimReward {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+        #claimReward:hover {
+            background-color: #218838;
+        }
+        .reward-button {
+            padding: 10px;
+            font-size: 16px;
+            margin: 5px;
+            border: 2px solid #007bff;
+            border-radius: 5px;
+            color: #ffffff;
+            background-color: #007bff;
+            cursor: pointer;
+        }
+        .reward-button:hover {
+            background-color: #0056b3;
+        }
+        #rewardMessage {
+            margin-top: 15px;
+            font-size: 16px;
+            color: #f0f0f0;
+        }
+        #totalCoins {
+            font-size: 18px;
+            margin-top: 10px;
+            color: #cccccc;
+        }
+        a {
+            color: #1e90ff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Daily Reward System</h1>
+        </header>
+        <main>
+            <section>
+                <p>Get more rewards by logging in every day!</p>
+                <div>
+                    <button class="reward-button">1. day: 500 points</button>
+                    <button class="reward-button">2. day: 1000 points</button>
+                    <button class="reward-button">3. day: 2000 points</button>
+                    <button class="reward-button">4. day: 3000 points</button>
+                    <button class="reward-button">5. day: 4000 points</button>
+                    <button class="reward-button">6. day: 5000 points</button>
+                    <button class="reward-button">7. day and beyond: 6000 points</button>
+                </div>
+                <button id="claimReward">Get Daily Reward</button>
+                <p id="rewardMessage"></p>
+                <p id="totalCoins">Total Coins: <span id="coinDisplay">0</span></p>
+            </section>
+            <a href="index.html">Return to Home Page</a>
+        </main>
+    </div>
+    <script>
+        const rewardMessage = document.getElementById('rewardMessage');
+        const claimRewardButton = document.getElementById('claimReward');
+        const coinDisplay = document.getElementById('coinDisplay');
+
+        let coins = Number(localStorage.getItem('coins')) || 0;
+        let lastRewardDay = Number(localStorage.getItem('lastRewardDay')) || 0;
+        let currentStreak = Number(localStorage.getItem('currentStreak')) || 0;
+
+        function updateCoinDisplay() {
+            coinDisplay.textContent = coins.toLocaleString();
+        }
+
+        function getDailyReward() {
+            const today = new Date().getDate();
+            if (today !== lastRewardDay) {
+                currentStreak = today - lastRewardDay === 1 ? currentStreak + 1 : 1;
+
+                let reward = 0;
+                if (currentStreak === 1) reward = 500;
+                else if (currentStreak === 2) reward = 1000;
+                else if (currentStreak === 3) reward = 2000;
+                else if (currentStreak === 4) reward = 3000;
+                else if (currentStreak === 5) reward = 4000;
+                else if (currentStreak === 6) reward = 5000;
+                else if (currentStreak >= 7) reward = 6000;
+
+                coins += reward;
+                lastRewardDay = today;
+                localStorage.setItem('coins', coins.toString());
+                localStorage.setItem('lastRewardDay', today.toString());
+                localStorage.setItem('currentStreak', currentStreak.toString());
+
+                rewardMessage.textContent = `Tebrikler! ${reward.toLocaleString()} coin kazand覺n覺z. Toplam: ${coins.toLocaleString()}`;
+                updateCoinDisplay();
+            } else {
+                rewardMessage.textContent = 'You've already received today's reward!';
+            }
+        }
+
+        claimRewardButton.addEventListener('click', getDailyReward);
+        updateCoinDisplay();
+    </script>
+</body>
+</html>
