@@ -55,6 +55,12 @@
             color: inherit; /* Rengi koru */
             flex-grow: 1; /* Alanı doldur */
         }
+
+        .completed {
+            background-color: #e0e0e0; /* Tamamlanan görevlerin arka plan rengi */
+            cursor: not-allowed; /* Tıklanamaz göster */
+            opacity: 0.6; /* Yarı saydamlık */
+        }
     </style>
 </head>
 <body>
@@ -77,46 +83,17 @@
         powerDisplay.textContent = power;
 
         // Görev tanımlamaları
-        let tasks = JSON.parse(localStorage.getItem('tasks')) || [
-            { id: 1, name: "Görev 1", points: 5, image: "task1.png", link: "https://example.com/task1" },
-            { id: 2, name: "Görev 2", points: 10, image: "task2.png", link: "https://example.com/task2" },
-            { id: 3, name: "Görev 3", points: 15, image: "task3.png", link: "https://example.com/task3" }
-        ];
+        let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
 
         // Görevleri ekrana yazdır
-        tasks.forEach(task => {
-            const taskDiv = document.createElement('div');
-            taskDiv.className = 'task';
+        renderTasks();
 
-            taskDiv.innerHTML = `
-                <a href="${task.link}" class="task-link" target="_blank">
-                    <img src="${task.image}" alt="${task.name}">
-                    <span>${task.name} (${task.points} puan)</span>
-                    <span class="checkmark">✔️</span>
-                </a>
-            `;
-            taskDiv.dataset.points = task.points; // Puanı data attribute olarak ekle
-            document.querySelector('#tasks').appendChild(taskDiv);
-
-            // Göreve tıklama olayını ekle
-            taskDiv.addEventListener('click', (e) => {
-                if (!taskDiv.classList.contains('completed')) { // Daha önce tamamlanmadıysa
-                    e.preventDefault(); // Linkin varsayılan davranışını engelle
-                    coins = Number(coins) + task.points; // Puan ekle
-                    localStorage.setItem('coins', `${coins}`);
-                    h1.textContent = `${coins.toLocaleString()}`;
-                    taskDiv.classList.add('completed'); // Tamamlandı olarak işaretle
-                    taskDiv.querySelector('.checkmark').style.display = 'block'; // Doğru işaretini göster
-                }
-            });
-        });
-
-        // Görev ekleme
-        function addTask(name, points, image, link) {
-            const newTask = { id: tasks.length + 1, name, points, image, link };
-            tasks.push(newTask);
-            localStorage.setItem('tasks', JSON.stringify(tasks)); // Güncellenmiş görevleri kaydet
-            displayTask(newTask); // Yeni görevi ekrana yazdır
+        function renderTasks() {
+            const tasksContainer = document.querySelector('#tasks');
+            tasksContainer.innerHTML = ''; // Mevcut görevleri temizle
+            // Sadece en son iki görevi göster
+            const recentTasks = tasks.slice(-2);
+            recentTasks.forEach(task => displayTask(task));
         }
 
         function displayTask(task) {
@@ -140,14 +117,29 @@
                     coins = Number(coins) + task.points;
                     localStorage.setItem('coins', `${coins}`);
                     h1.textContent = `${coins.toLocaleString()}`;
-                    taskDiv.classList.add('completed');
+                    taskDiv.classList.add('completed'); // Görev tamamlandı olarak işaretle
                     taskDiv.querySelector('.checkmark').style.display = 'block';
+                    taskDiv.style.pointerEvents = 'none'; // Tıklanamaz hale getir
                 }
             });
         }
 
-        // Örnek olarak yeni bir görev ekleyelim
-        addTask("Yeni Görev", 20, "task4.png", "https://example.com/task4");
+        // Görev ekleme fonksiyonu
+        function addTask(name, points, image, link) {
+            const newTask = { id: tasks.length + 1, name, points, image, link };
+            tasks.push(newTask);
+            localStorage.setItem('tasks', JSON.stringify(tasks)); // Güncellenmiş görevleri kaydet
+            renderTasks(); // Görevleri güncelle
+
+            // Eğer iki görevden fazla varsa, en eski görevleri kaldır
+            if (tasks.length > 2) {
+                tasks.shift(); // İlk öğeyi kaldır
+                localStorage.setItem('tasks', JSON.stringify(tasks)); // Güncellenmiş görevleri kaydet
+            }
+        }
+
+        // Burada yeni görev eklemek için örnek kullanım:
+        // addTask("Yeni Görev", 20, "task4.png", "https://example.com/task4");
 
         setInterval(() => {
             power = localStorage.getItem('power');
@@ -157,6 +149,5 @@
             }
         }, 1000);
     </script>
-    <script src="./assets/js/charge.js"></script>
 </body>
 </html>
