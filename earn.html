@@ -1,207 +1,162 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="./assets/css/style.css">
-    <link rel="stylesheet" href="./assets/css/responsive.css">
-    <meta name="theme-color" content="#f19e36" />
+    <title>Görevler Sayfası</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f4f4f4;
+            color: #333;
+            font-family: Arial, sans-serif;
+        }
 
-    <link rel="icon" type="image/x-icon" href="./assets/favicon/favicon.ico">
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        #tasks {
+            width: 80%;
+            max-width: 600px;
+            margin-top: 20px;
+        }
+
+        .task {
+            display: flex;
+            align-items: center;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px 0;
+            position: relative;
+            cursor: pointer; /* Tıklanabilir göster */
+        }
+
+        .task img {
+            width: 50px;
+            height: 50px;
+            margin-right: 10px;
+        }
+
+        .checkmark {
+            display: none;
+            position: absolute;
+            right: 10px;
+            font-size: 20px;
+            color: green;
+        }
+
+        .task-link {
+            text-decoration: none;
+            color: inherit; /* Rengi koru */
+            flex-grow: 1; /* Alanı doldur */
+        }
+    </style>
 </head>
-<body class="earn">
+<body>
+    <h1 id="coins">0</h1>
+    <div id="tasks"></div>
+    <div id="power">500</div>
 
-    <div class="haeder">
-        <a href="index.html">
-            <svg width="25px" height="25px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M22 11.9299H2" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M8.00009 19L2.84009 14C2.5677 13.7429 2.35071 13.433 2.20239 13.0891C2.05407 12.7452 1.97754 12.3745 1.97754 12C1.97754 11.6255 2.05407 11.2548 2.20239 10.9109C2.35071 10.567 2.5677 10.2571 2.84009 10L8.00009 5" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-        </a>
-        
-    </div>
+    <script>
+        const body = document.body;
+        const h1 = body.querySelector('#coins');
+        const powerDisplay = body.querySelector('#power');
 
-    <div class="earn-more">
-        <img src="./assets/images/apple.svg" width="80px">
-        <h3>Earn more coins</h3>
-    </div>
-    <br> <br>
+        let coins = localStorage.getItem('coins') || '0';
+        let total = localStorage.getItem('total') || '500';
+        let power = localStorage.getItem('power') || '500';
+        let count = localStorage.getItem('count') || '1';
 
-    <div class="boosters-button">
+        localStorage.setItem('coins', coins);
+        h1.textContent = Number(coins).toLocaleString();
+        powerDisplay.textContent = power;
 
-        <div class="boosters-button-detail">
-            <div class="boosters-button-image">
-                <img src="./assets/images/you.gif" width="45px">
-            </div>
-            <div>
-                <div>
-                    <h4>subscribe</h4>
-                </div>
-                <div class="boosters-button-data">
-                    <img src="./assets/images/apple.svg" width="20px" class="m-r-25">
-                    <h5 class="m-r-25">2500</h5>
-                    <span class="m-r-25">•</span>
-                    
-                </div>
-            </div>
-        </div>
+        // Görev tanımlamaları
+        let tasks = JSON.parse(localStorage.getItem('tasks')) || [
+            { id: 1, name: "Görev 1", points: 5, image: "task1.png", link: "https://example.com/task1" },
+            { id: 2, name: "Görev 2", points: 10, image: "task2.png", link: "https://example.com/task2" },
+            { id: 3, name: "Görev 3", points: 15, image: "task3.png", link: "https://example.com/task3" }
+        ];
 
-        <div>
-            <a href="https://t.me/boost/tokendonkey"><svg width="30px" height="30px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M9 5L14.15 10C14.4237 10.2563 14.6419 10.5659 14.791 10.9099C14.9402 11.2539 15.0171 11.625 15.0171 12C15.0171 12.375 14.9402 12.7458 14.791 13.0898C14.6419 13.4339 14.4237 13.7437 14.15 14L9 19" stroke="#ffffff" opacity="0.4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg></a>
-        </div>
+        // Görevleri ekrana yazdır
+        tasks.forEach(task => {
+            const taskDiv = document.createElement('div');
+            taskDiv.className = 'task';
 
+            taskDiv.innerHTML = `
+                <a href="${task.link}" class="task-link" target="_blank">
+                    <img src="${task.image}" alt="${task.name}">
+                    <span>${task.name} (${task.points} puan)</span>
+                    <span class="checkmark">✔️</span>
+                </a>
+            `;
+            taskDiv.dataset.points = task.points; // Puanı data attribute olarak ekle
+            document.querySelector('#tasks').appendChild(taskDiv);
 
-    </div>
-</div>
-<br> <br>
-<div class="boosters-button">
+            // Göreve tıklama olayını ekle
+            taskDiv.addEventListener('click', (e) => {
+                if (!taskDiv.classList.contains('completed')) { // Daha önce tamamlanmadıysa
+                    e.preventDefault(); // Linkin varsayılan davranışını engelle
+                    coins = Number(coins) + task.points; // Puan ekle
+                    localStorage.setItem('coins', `${coins}`);
+                    h1.textContent = `${coins.toLocaleString()}`;
+                    taskDiv.classList.add('completed'); // Tamamlandı olarak işaretle
+                    taskDiv.querySelector('.checkmark').style.display = 'block'; // Doğru işaretini göster
+                }
+            });
+        });
 
-    <div class="boosters-button-detail">
-        <div class="boosters-button-image">
-            <img src="./assets/images/1.gif" width="45px">
-        </div>
-        <div>
-            <div>
-                <h4>follow us</h4>
-            </div>
-            <div class="boosters-button-data">
-                <img src="./assets/images/apple.svg" width="20px" class="m-r-25">
-                <h5 class="m-r-25">2500</h5>
-               
-              
-            </div>
-        </div>
-    </div>
+        // Görev ekleme
+        function addTask(name, points, image, link) {
+            const newTask = { id: tasks.length + 1, name, points, image, link };
+            tasks.push(newTask);
+            localStorage.setItem('tasks', JSON.stringify(tasks)); // Güncellenmiş görevleri kaydet
+            displayTask(newTask); // Yeni görevi ekrana yazdır
+        }
 
-    <div>
-       <a href="https://t.me/boost/tokendonkey"><svg width="30px" height="30px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M9 5L14.15 10C14.4237 10.2563 14.6419 10.5659 14.791 10.9099C14.9402 11.2539 15.0171 11.625 15.0171 12C15.0171 12.375 14.9402 12.7458 14.791 13.0898C14.6419 13.4339 14.4237 13.7437 14.15 14L9 19" stroke="#ffffff" opacity="0.4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg></a> 
-    </div>
+        function displayTask(task) {
+            const taskDiv = document.createElement('div');
+            taskDiv.className = 'task';
 
+            taskDiv.innerHTML = `
+                <a href="${task.link}" class="task-link" target="_blank">
+                    <img src="${task.image}" alt="${task.name}">
+                    <span>${task.name} (${task.points} puan)</span>
+                    <span class="checkmark">✔️</span>
+                </a>
+            `;
+            taskDiv.dataset.points = task.points;
+            document.querySelector('#tasks').appendChild(taskDiv);
 
-</div>
-</div>
-<br> <br>
-<div class="boosters-button">
+            // Göreve tıklama olayını ekle
+            taskDiv.addEventListener('click', (e) => {
+                if (!taskDiv.classList.contains('completed')) {
+                    e.preventDefault();
+                    coins = Number(coins) + task.points;
+                    localStorage.setItem('coins', `${coins}`);
+                    h1.textContent = `${coins.toLocaleString()}`;
+                    taskDiv.classList.add('completed');
+                    taskDiv.querySelector('.checkmark').style.display = 'block';
+                }
+            });
+        }
 
-    <div class="boosters-button-detail">
-        <div class="boosters-button-image">
-            <img src="./assets/images/2.gif" width="45px">
-        </div>
-        <div>
-            <div>
-                <h4>follow us</h4>
-            </div>
-            <div class="boosters-button-data">
-                <img src="./assets/images/apple.svg" width="20px" class="m-r-25">
-                <h5 class="m-r-25">2500</h5>
-               
-            </div>
-        </div>
-    </div>
+        // Örnek olarak yeni bir görev ekleyelim
+        addTask("Yeni Görev", 20, "task4.png", "https://example.com/task4");
 
-    <div>
-        <a href="https://t.me/boost/tokendonkey"><svg width="30px" height="30px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M9 5L14.15 10C14.4237 10.2563 14.6419 10.5659 14.791 10.9099C14.9402 11.2539 15.0171 11.625 15.0171 12C15.0171 12.375 14.9402 12.7458 14.791 13.0898C14.6419 13.4339 14.4237 13.7437 14.15 14L9 19" stroke="#ffffff" opacity="0.4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg></a>
-    </div>
-
-
-</div>
-</div>
-<br> <br>
-<div class="boosters-button">
-
-    <div class="boosters-button-detail">
-        <div class="boosters-button-image">
-            <img src="./assets/images/3.gif" width="45px">
-        </div>
-        <div>
-            <div>
-                <h4>follow us</h4>
-            </div>
-            <div class="boosters-button-data">
-                <img src="./assets/images/apple.svg" width="20px" class="m-r-25">
-                <h5 class="m-r-25">2500</h5>
-              
-            </div>
-        </div>
-    </div>
-
-    <div>
-        <a href="https://t.me/boost/tokendonkey"><svg width="30px" height="30px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M9 5L14.15 10C14.4237 10.2563 14.6419 10.5659 14.791 10.9099C14.9402 11.2539 15.0171 11.625 15.0171 12C15.0171 12.375 14.9402 12.7458 14.791 13.0898C14.6419 13.4339 14.4237 13.7437 14.15 14L9 19" stroke="#ffffff" opacity="0.4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg></a>
-    </div>
-
-
-</div>
-</div>
-<br> <br>
-<div class="boosters-button">
-
-    <div class="boosters-button-detail">
-        <div class="boosters-button-image">
-            <img src="./assets/images/4.gif" width="45px">
-        </div>
-        <div>
-            <div>
-                <h4>follow us</h4>
-            </div>
-            <div class="boosters-button-data">
-                <img src="./assets/images/apple.svg" width="20px" class="m-r-25">
-                <h5 class="m-r-25">2500</h5>
-                
-            </div>
-        </div>
-    </div>
-
-    <div>
-        <a href="https://t.me/boost/tokendonkey"><svg width="30px" height="30px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M9 5L14.15 10C14.4237 10.2563 14.6419 10.5659 14.791 10.9099C14.9402 11.2539 15.0171 11.625 15.0171 12C15.0171 12.375 14.9402 12.7458 14.791 13.0898C14.6419 13.4339 14.4237 13.7437 14.15 14L9 19" stroke="#ffffff" opacity="0.4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg></a>
-    </div>
-
-
-</div>
-</div>
-<br> <br>
-<div class="boosters-button">
-
-    <div class="boosters-button-detail">
-        <div class="boosters-button-image">
-            <img src="./assets/images/5.gif" width="45px">
-        </div>
-        <div>
-            <div>
-                <h4>follow us</h4>
-            </div>
-            <div class="boosters-button-data">
-                <img src="./assets/images/apple.svg" width="20px" class="m-r-25">
-                <h5 class="m-r-25">2500</h5>
-                
-            </div>
-        </div>
-    </div>
-
-    <div>
-        <a href="https://t.me/boost/tokendonkey"><svg width="30px" height="30px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M9 5L14.15 10C14.4237 10.2563 14.6419 10.5659 14.791 10.9099C14.9402 11.2539 15.0171 11.625 15.0171 12C15.0171 12.375 14.9402 12.7458 14.791 13.0898C14.6419 13.4339 14.4237 13.7437 14.15 14L9 19" stroke="#ffffff" opacity="0.4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg></a>
-    </div>
-
-
-</div>
-</div>
-
-    <div class="invite-bonus-box">
-        
-    </div>
-    
+        setInterval(() => {
+            power = localStorage.getItem('power');
+            if (Number(total) > power) {
+                localStorage.setItem('power', `${Number(power) + Number(count)}`);
+                powerDisplay.textContent = `${Number(power) + Number(count)}`;
+            }
+        }, 1000);
+    </script>
     <script src="./assets/js/charge.js"></script>
 </body>
 </html>
