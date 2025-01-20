@@ -84,3 +84,49 @@ setInterval(()=> {
         body.querySelector('.progress').style.width = `${(100 * power) / total}%`;
     }
 }, 1000);
+
+// Günlük ödül sistemi ekleme
+const rewardBtn = document.createElement('button');
+const rewardInfo = document.createElement('p');
+
+rewardBtn.textContent = 'Günlük Ödül Al';
+rewardInfo.textContent = '';
+body.appendChild(rewardInfo);
+body.appendChild(rewardBtn);
+
+let lastRewardDay = Number(localStorage.getItem('lastRewardDay')) || 0;
+let currentStreak = Number(localStorage.getItem('currentStreak')) || 0;
+
+function updateCoinsDisplay() {
+  h1.textContent = Number(localStorage.getItem('coins')).toLocaleString();
+}
+
+function getDailyReward() {
+  const today = new Date().getDate();
+  if (today !== lastRewardDay) {
+    currentStreak = today - lastRewardDay === 1 ? currentStreak + 1 : 1;
+
+    let reward = 0;
+    if (currentStreak === 1) reward = 500;
+    else if (currentStreak === 2) reward = 1000;
+    else if (currentStreak === 3) reward = 2000;
+    else if (currentStreak === 4) reward = 3000;
+    else if (currentStreak === 5) reward = 4000;
+    else if (currentStreak === 6) reward = 5000;
+    else if (currentStreak >= 7) reward = 6000;
+
+    coins = Number(localStorage.getItem('coins')) + reward;
+    lastRewardDay = today;
+    localStorage.setItem('coins', coins.toString());
+    localStorage.setItem('lastRewardDay', today.toString());
+    localStorage.setItem('currentStreak', currentStreak.toString());
+
+    updateCoinsDisplay();
+    rewardInfo.textContent = `Günlük ödül alındı: ${reward.toLocaleString()}! Toplam coin: ${coins.toLocaleString()}`;
+  } else {
+    rewardInfo.textContent = 'Bugünün ödülünü zaten aldınız!';
+  }
+}
+
+rewardBtn.addEventListener('click', getDailyReward);
+
