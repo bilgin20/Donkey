@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Görev Ekleme Sayfası</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f4f4f4;
+            color: #333;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            width: 300px;
+            margin: 20px;
+        }
+
+        input, button {
+            margin: 10px 0;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        button {
+            cursor: pointer;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <h1>Görev Ekle</h1>
+    <form id="taskForm">
+        <input type="text" id="taskName" placeholder="Görev Adı" required>
+        <input type="number" id="taskPoints" placeholder="Puan" required>
+        <input type="text" id="taskImage" placeholder="Resim URL'si" required>
+        <input type="url" id="taskLink" placeholder="Görev Linki" required>
+        <button type="submit">Görev Ekle</button>
+    </form>
+
+    <script>
+        const taskForm = document.getElementById('taskForm');
+
+        taskForm.addEventListener('submit', function(e) {
+            e.preventDefault(); // Formun varsayılan davranışını engelle
+
+            const taskName = document.getElementById('taskName').value;
+            const taskPoints = document.getElementById('taskPoints').value;
+            const taskImage = document.getElementById('taskImage').value;
+            const taskLink = document.getElementById('taskLink').value;
+
+            // Yeni görev nesnesi oluştur
+            const newTask = {
+                id: Date.now(), // Benzersiz bir ID oluştur
+                name: taskName,
+                points: parseInt(taskPoints),
+                image: taskImage,
+                link: taskLink
+            };
+
+            // LocalStorage'a kaydet
+            let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+            tasks.push(newTask);
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+
+            // Formu sıfırla
+            taskForm.reset();
+            alert('Görev başarıyla eklendi!');
+        });
+    </script>
+</body>
+</html>
