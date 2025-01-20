@@ -89,7 +89,7 @@ setInterval(()=> {
 const rewardBtn = document.createElement('button');
 const rewardInfo = document.createElement('p');
 
-rewardBtn.textContent = 'Günlük Ödül Al';
+rewardBtn.textContent = 'Claim Daily Reward';
 rewardInfo.textContent = '';
 body.appendChild(rewardInfo);
 body.appendChild(rewardBtn);
@@ -122,11 +122,10 @@ function getDailyReward() {
     localStorage.setItem('currentStreak', currentStreak.toString());
 
     updateCoinsDisplay();
-    rewardInfo.textContent = `Günlük ödül alındı: ${reward.toLocaleString()}! Toplam coin: ${coins.toLocaleString()}`;
+    rewardInfo.textContent = `Daily reward claimed: ${reward.toLocaleString()}! Total coins: ${coins.toLocaleString()}`;
   } else {
-    rewardInfo.textContent = 'Bugünün ödülünü zaten aldınız!';
+    rewardInfo.textContent = 'You have already claimed today\'s reward!';
   }
 }
 
 rewardBtn.addEventListener('click', getDailyReward);
-
