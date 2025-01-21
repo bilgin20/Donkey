@@ -9,8 +9,8 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            background-color: #f4f4f4;
-            color: #333;
+            background-color: black; /* Arka plan siyah */
+            color: #f4f4f4; /* Yazı rengi beyaz */
             font-family: Arial, sans-serif;
         }
 
@@ -27,7 +27,7 @@
         .task {
             display: flex;
             align-items: center;
-            background: #fff;
+            background: #333; /* Görevlerin arka planı koyu gri */
             border: 1px solid #ddd;
             border-radius: 5px;
             padding: 10px;
@@ -57,17 +57,36 @@
         }
 
         .completed {
-            background-color: #e0e0e0; /* Tamamlanan görevlerin arka plan rengi */
+            background-color: #555; /* Tamamlanan görevlerin arka plan rengi daha koyu gri */
             cursor: not-allowed; /* Tıklanamaz göster */
             opacity: 0.6; /* Yarı saydamlık */
         }
+
+        /* Return to Home butonu stili */
+        .home-link {
+            margin-top: 20px;
+            text-decoration: none;
+            font-size: 16px;
+            color: white;
+            background-color: #4CAF50;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-align: center;
+            display: inline-block;
+        }
+
+        .home-link:hover {
+            background-color: #45a049;
+        }
     </style>
 </head>
-    <a href="index.html" style="color: #000000;">Return to Home</a>
 <body>
     <h1 id="coins">0</h1>
     <div id="tasks"></div>
     <div id="power">500</div>
+
+    <!-- Return to Home Link -->
+    <a href="index.html" class="home-link">Return to Home</a>
 
     <script>
         const body = document.body;
@@ -85,6 +104,7 @@
 
         // Görev tanımlamaları
         let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+        let completedTasks = JSON.parse(localStorage.getItem('completedTasks')) || [];
 
         // Görevleri ekrana yazdır
         renderTasks();
@@ -100,6 +120,11 @@
         function displayTask(task) {
             const taskDiv = document.createElement('div');
             taskDiv.className = 'task';
+
+            // Eğer görev tamamlandıysa, "completed" sınıfını ekleyip, işaretle
+            if (completedTasks.includes(task.id)) {
+                taskDiv.classList.add('completed');
+            }
 
             taskDiv.innerHTML = `
                 <a href="${task.link}" class="task-link" target="_blank">
@@ -121,6 +146,8 @@
                     taskDiv.classList.add('completed'); // Görev tamamlandı olarak işaretle
                     taskDiv.querySelector('.checkmark').style.display = 'block';
                     taskDiv.style.pointerEvents = 'none'; // Tıklanamaz hale getir
+                    completedTasks.push(task.id); // Tamamlanan görevleri kaydet
+                    localStorage.setItem('completedTasks', JSON.stringify(completedTasks)); // Güncellenmiş tamamlanan görevleri kaydet
                 }
             });
         }
@@ -150,6 +177,5 @@
             }
         }, 1000);
     </script>
-   <a href="index.html" style="color: black;">Return to Home</a> 
 </body>
 </html>
