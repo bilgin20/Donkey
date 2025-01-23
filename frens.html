@@ -40,7 +40,7 @@
       <p class="text-center mb-4">You and your friend will receive bonuses</p>
       <div class="space-y-4">
         <div class="bg-slate-900 p-4 flex items-center rounded-3xl shadow-lg">
-          <img src="./assets/images/f.png" width="50px" height="50px" alt="gift" class="w-12 h-12 mr-4">   
+          <img src="./assets/images/hester.png" width="50px" height="50px" alt="gift" class="w-12 h-12 mr-4">   
           <div>
             <p class="font-bold">Invite a friend</p>
             <p class="text-yellow-400">+5,000 for you and your friend</p>
@@ -82,58 +82,5 @@
 
     <script src="./assets/js/js.js"></script>
     <script src="./assets/js/charge.js"></script>
-    <script>
-        const friendsList = document.getElementById('friendsList');
-        let invitedFriends = JSON.parse(localStorage.getItem('invitedFriends')) || [];
-
-        function saveFriends() {
-            localStorage.setItem('invitedFriends', JSON.stringify(invitedFriends));
-        }
-
-        function displayInvitedFriends() {
-            friendsList.innerHTML = '';
-            invitedFriends.forEach((friend, index) => {
-                const listItem = document.createElement('li');
-                listItem.textContent = `${index + 1}. ${friend}`;
-                friendsList.appendChild(listItem);
-            });
-        }
-
-        function addFriend(name) {
-            if (name) {
-                invitedFriends.push(name);
-                saveFriends();
-                displayInvitedFriends();
-            }
-        }
-
-        // Get 'name' parameter from URL
-        function getQueryParam(name) {
-            const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get(name);
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const friendNameFromUrl = getQueryParam('name');
-            if (friendNameFromUrl) {
-                addFriend(decodeURIComponent(friendNameFromUrl));  // Add friend automatically from URL parameter
-            }
-            displayInvitedFriends();
-        });
-
-        // Copy the link to clipboard with friend info
-        document.getElementById('copyButton').addEventListener('click', () => {
-            const friendName = prompt('Enter the name of the invited friend:');
-            if (friendName) {
-                addFriend(friendName);
-                const linkInput = document.getElementById('link');
-                const baseUrl = "https://t.me/DonkeyToken_bot/donkeytoken";
-                linkInput.value = `${baseUrl}?name=${encodeURIComponent(friendName)}`;
-                linkInput.select();
-                document.execCommand('copy');
-                alert(`Invite link copied with ${friendName}`);
-            }
-        });
-    </script>
 </body>
 </html>
