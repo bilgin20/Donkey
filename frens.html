@@ -1,12 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Invite Friends - Frens</title>
-    <meta name="theme-color" content="#f19e36" />
-    <link rel="icon" type="image/x-icon" href="./assets/favicon/favicon.ico">
-      <script src="./assets/3.4.5"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="./assets/3.4.5"></script>
   <style>
     body,
     html {
@@ -21,6 +19,7 @@
   <link rel="stylesheet" href="./assets/css/style-2.css">
   <link rel="stylesheet" href="./assets/css/responsive-1.css">
 </head>
+
 <body class="boost">
   <div class=" text-white p-4 rounded-lg max-w-md mx-auto full-height flex flex-col">
     <div class="flex justify-between items-center mb-4">
@@ -58,7 +57,7 @@
     
     document.getElementById('inviteButton').addEventListener('click', function() {
     
-      const textToCopy = "https://t.me/share/url?url=https://t.me/DonkeyToken_bot/donkeytoken?start=" + chatId + "&text=Join%20me%20in%20donkeyCoin%20and%20start%20mining%20today!%20Let's%20earn%20together!";
+      const textToCopy = "https://t.me/share/url?url=https://t.me/DonkeyToken_bot?start=" + chatId + "&text=Join%20me%20in%20DonkeyCoin%20and%20start%20mining%20today!%20Let's%20earn%20together!";
       
       navigator.clipboard.writeText(textToCopy).then(function() {
         const copyMessage = document.getElementById('copyMessage');
@@ -68,15 +67,13 @@
         setTimeout(function() {
           copyMessage.classList.remove('block');
           copyMessage.classList.add('hidden');
-          window.location = "https://t.me/share/url?url=https://t.me/DonkeyToken_bot/donkeytoken?start=" + chatId + "&text=Join%20me%20in%20donkeyCoin%20and%20start%20mining%20today!%20Let's%20earn%20together!"
+          window.location = "https://t.me/share/url?url=https://t.me/DonkeyToken_bot?start=" + chatId + "&text=Join%20me%20in%20DonkeyCoin%20and%20start%20mining%20today!%20Let's%20earn%20together!"
         }, 2000);
       }).catch(function(err) {
         console.error('Error in copying text: ', err);
       });
     });
   </script>
-
-    <script src="./assets/js/js.js"></script>
-    <script src="./assets/js/charge.js"></script>
 </body>
+
 </html>
