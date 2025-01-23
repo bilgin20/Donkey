@@ -51,7 +51,42 @@
         </form>
         
     </div>
-
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telegram ile Giriş</title>
+    <script type="module" src="./assets/js/main.js"></script> <!-- JavaScript dosyanızı burada ekleyin -->
+    <style>
+        /* Basit stil örneği */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        #telegram-login {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #0088cc;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <button id="telegram-login">Telegram ile Giriş Yap</button>
+    <script>
+        // Telegram ile giriş butonuna tıklandığında yapılacak işlemler
+        document.getElementById('telegram-login').addEventListener('click', () => {
+            const loginUrl = `https://telegram.me/DonkeyToken_bot?start=login`; // Bot adınızı buraya ekleyin
+            window.location.href = loginUrl;
+        });
+    </script>
+</body>
+</html>
     <script>
         let coins = localStorage.getItem('coins')
         document.querySelector('.login-coins-count').textContent = coins;
