@@ -150,3 +150,23 @@ const connect = async () => {
 };
 // EVENT LISTENERS
 btn.addEventListener("click", connect);
+
+
+
+// Telegram user integration
+window.addEventListener("load", () => {
+    if (window.Telegram && window.Telegram.WebApp) {
+        const user = window.Telegram.WebApp.initDataUnsafe?.user;
+        userName = user.username;
+        userCont.textContent = userName;
+        const dbref = ref(db);
+        get(child(dbref, "users/" + userName)).then((snapshot) => {
+            if (snapshot.exists()) {
+                pointCont.textContent = snapshot.val().points;
+            } else {
+                console.log("Not found");
+            }
+        });
+    }
+});
+
