@@ -13,47 +13,35 @@
     <script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
 </head>
 <body>
-    <!-- Header Container -->
-    <div class="header-container">
-        <!-- Sol Taraf: Rank Container -->
-        <div class="rank-container">
-            <div class="rank-items">
-                <img src="./assets/images/hamster.png" class="select-none logo" width="50px">
-                <div class="rank-info">
-                    <span id="rank" class="select-none">DONKEY</span>
-                    <!-- Telegram Kullanıcı Bilgileri -->
-                    <div class="user-info">
-                        <img id="user-photo" src="" alt="User Photo" class="user-photo">
-                        <span id="user-name" class="select-none"></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Sağ Taraf: Connect Wallet Buttons -->
-        <div class="wallet-buttons-container">
-            <div id="ton-connect"></div>
-            <button id="sentTransactionBtn" class="trasact">Send Transaction</button>
+    <div class="rank-container">
+        <div class="rank-items">
+            <h3 class="select-none"></h3>
+            <span></span>
+            <img src="./assets/images/hamster.png" class="select-none" width="30px">
+            <span id="rank" class="select-none">DONKEY</span>
         </div>
     </div>
 
-    <!-- Coin Count Container -->
     <div class="coin-count-container">
         <div class="user-container">
-            <span id="total-points" class="select-none">Total Points: 0</span>
+            <img id="user-photo" src="" alt="User Photo" class="user-photo">
+            <h1 id="user-name" class="select-none"></h1>
         </div>
     </div>
 
-    <!-- Tıklama Alanı -->
     <div class="coin-container">
         <img src="./assets/images/hamster.png" id="coin" class="select-none" width="300px" />
     </div>
 
-    <!-- Message from the Lord of the Donkey -->
+    <div class="wallet-container">
+        <div id="ton-connect"></div>
+        <button id="sentTransactionBtn" class="trasact">Send Transaction</button>
+    </div>
+
     <div class="message-container">
         <div class="message-content">
             <h2>Message from the Lord of the Donkey:</h2>
-            <p>Airdrop Date: March 2025-April 2025</p>
+            <p>Airdrop Date: March 2025 - April 2025</p>
             <a href="day.html">Daily Reward System</a>
         </div>
     </div>
@@ -66,18 +54,19 @@
                 <span class="gray select-none" id="total">/0</span>
             </div>
         </div>
-        <div class="menu-bottuns">
+
+        <div class="menu-buttons">
             <a href="frens.html" class="button b-r">
                 <img src="./assets/images/1.png" alt="" width="28px">
-                <span class="select-none">friends</span>
+                <span class="select-none">Friends</span>
             </a>
             <a href="earn.html" class="button b-r">
                 <img src="./assets/images/2.png" alt="" width="28px">
-                <span class="select-none">tasks</span>
+                <span class="select-none">Tasks</span>
             </a>
             <a href="boost.html" class="button">
                 <img src="./assets/images/3.png" alt="" width="28px">
-                <span class="select-none">balance</span>
+                <span class="select-none">Balance</span>
             </a>
         </div>
     </div>
@@ -85,270 +74,87 @@
     <div class="progress-bar">
         <div class="progress"></div>
     </div>
- 
+
     <script>
-document.addEventListener("DOMContentLoaded", function () {
-    if (window.Telegram && window.Telegram.WebApp) {
-        const tg = window.Telegram.WebApp;
-        tg.expand(); // WebApp tam ekran aç
-
-        console.log("Telegram WebApp initDataUnsafe:", tg.initDataUnsafe); // initDataUnsafe'ı konsola yazdıralım
-
-        const user = tg.initDataUnsafe?.user;
-        if (user) {
-            const userName = user.username || `ID: ${user.id || "Bilinmiyor"}`; // Kullanıcı adı yoksa ID göster
-            const userPhoto = user.photo_url || "default-avatar.png"; // Fotoğraf yoksa varsayılan fotoğraf
-
-            // Konsola kullanıcı adı ve fotoğraf bilgisini yazdıralım
-            console.log("Kullanıcı Adı:", userName);
-            console.log("Kullanıcı Fotoğrafı:", userPhoto);
-
-            // Kullanıcı adını 'user-name' id'li elemana yerleştirelim
-            const userNameElement = document.getElementById("user-name");
-            userNameElement.innerHTML = userName; // Kullanıcı adını buraya ekliyoruz
-
-            // Kullanıcı fotoğrafını 'user-photo' id'li elemana yerleştirelim
-            const userPhotoElement = document.getElementById("user-photo");
-            userPhotoElement.src = userPhoto; // Kullanıcı fotoğrafını buraya ekliyoruz
-        } else {
-            console.log("Telegram kullanıcı bilgisi bulunamadı!");
-        }
-    } else {
-        console.log("Telegram WebApp desteklenmiyor!");
-    }
-});
         document.addEventListener("DOMContentLoaded", function () {
-    // Toplam puanı güncelle
-    let totalPoints = 0;
-    const totalPointsElement = document.getElementById("total-points");
+            if (window.Telegram && window.Telegram.WebApp) {
+                const tg = window.Telegram.WebApp;
+                tg.expand();
 
-    // Tıklama olayı
-    const coinElement = document.getElementById("coin");
-    if (coinElement) {
-        coinElement.addEventListener("click", function () {
-            totalPoints += 1; // Her tıklamada puanı artır
-            totalPointsElement.textContent = `Total Points: ${totalPoints}`; // Puanı güncelle
+                const user = tg.initDataUnsafe?.user;
+                if (user) {
+                    const userName = user.username || `ID: ${user.id || "Bilinmiyor"}`;
+                    const userPhoto = user.photo_url || "default-avatar.png";
+
+                    document.getElementById("user-name").innerHTML = userName;
+                    document.getElementById("user-photo").src = userPhoto;
+                } else {
+                    console.log("Telegram kullanıcı bilgisi bulunamadı!");
+                }
+            } else {
+                console.log("Telegram WebApp desteklenmiyor!");
+            }
         });
-    }
 
-    // Telegram kullanıcı bilgilerini yükle
-    if (window.Telegram && window.Telegram.WebApp) {
-        const tg = window.Telegram.WebApp;
-        tg.expand(); // WebApp tam ekran aç
+        let isWalletConnected = false;
+        let tonConnectUI = null;
 
-        console.log("Telegram WebApp initDataUnsafe:", tg.initDataUnsafe); // initDataUnsafe'ı konsola yazdıralım
+        document.addEventListener("DOMContentLoaded", async function() {
+            tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
+                manifestUrl: 'https://bilgin20.github.io/Donkey/tonconnect-manifest.json',
+                buttonRootId: 'ton-connect'
+            });
 
-        const user = tg.initDataUnsafe?.user;
-        if (user) {
-            const userName = user.username || `ID: ${user.id || "Bilinmiyor"}`; // Kullanıcı adı yoksa ID göster
-            const userPhoto = user.photo_url || "default-avatar.png"; // Fotoğraf yoksa varsayılan fotoğraf
-
-            // Kullanıcı adını 'user-name' id'li elemana yerleştirelim
-            const userNameElement = document.getElementById("user-name");
-            userNameElement.innerHTML = userName; // Kullanıcı adını buraya ekliyoruz
-
-            // Kullanıcı fotoğrafını 'user-photo' id'li elemana yerleştirelim
-            const userPhotoElement = document.getElementById("user-photo");
-            userPhotoElement.src = userPhoto; // Kullanıcı fotoğrafını buraya ekliyoruz
-        } else {
-            console.log("Telegram kullanıcı bilgisi bulunamadı!");
-        }
-    } else {
-        console.log("Telegram WebApp desteklenmiyor!");
-    }
-});
-</script>
-     <script>
-      
-    let isWalletConnected = false;
-    let tonConnectUI = null;
-//Initialize TON Connect UI  
-    document.addEventListener("DOMContentLoaded", async function() {
-        tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
-            manifestUrl: 'https://bilgin20.github.io/Donkey/tonconnect-manifest.json',
-            buttonRootId: 'ton-connect'
-        });
-//check if wallet is already connected
-        const connectWallet = await tonConnectUI.getWallets();
-        if (connectWallet) {
-            isWalletConnected = true;
-            console.log("Wallet is already connected", connectedWallet);
-        }
-    });
-    // Connet Wallet
-    async function connectWallet() {
-        if (isWalletConnected) {
-            console.log("Wallet already connected.");
-            return;
-        }
-        try {
-            const connectWallet = await tonConnectUI.connectWallet();
+            const connectWallet = await tonConnectUI.getWallets();
             if (connectWallet) {
                 isWalletConnected = true;
-                console.log("Wallet connected:", connectedWallet);
+                console.log("Wallet is already connected", connectWallet);
             }
-        } catch (error) {
-            console.error("Error connecting to wallet", error);
-        }
-    }
-   // Send Transaction
-    async function sentTonTransaction() {
-        if (!isWalletConnected) {
-            console.error("Please connect your wallet first.");
-            return;
-        }
-        const transaction = {
-            messages: [
-                {
-                    address: "UQBWIRtBw_keNmzkzecRm9TY8GkUU4IajzA482SV8YCIMxrn", // destination address
-                    amount: "20000000" //Toncoin in nanotons (0,02 TON)
+        });
+
+        async function connectWallet() {
+            if (isWalletConnected) {
+                console.log("Wallet already connected.");
+                return;
+            }
+            try {
+                const connectWallet = await tonConnectUI.connectWallet();
+                if (connectWallet) {
+                    isWalletConnected = true;
+                    console.log("Wallet connected:", connectWallet);
                 }
-            ]
-        };
-
-        try {
-            const result = await tonConnectUI.sendTransaction(transaction);
-            console.log("Transaction successful:", result);
-        } catch (error) {
-            console.error("Transaction failed", error);
+            } catch (error) {
+                console.error("Error connecting to wallet", error);
+            }
         }
-    }
 
-    document.getElementById("connectWalletBtn").addEventListener("click", connectWallet);
-    document.getElementById("sentTransactionBtn").addEventListener("click", sentTonTransaction);
+        async function sentTonTransaction() {
+            if (!isWalletConnected) {
+                console.error("Please connect your wallet first.");
+                return;
+            }
+            const transaction = {
+                messages: [
+                    {
+                        address: "UQBWIRtBw_keNmzkzecRm9TY8GkUU4IajzA482SV8YCIMxrn",
+                        amount: "20000000"
+                    }
+                ]
+            };
+
+            try {
+                const result = await tonConnectUI.sendTransaction(transaction);
+                console.log("Transaction successful:", result);
+            } catch (error) {
+                console.error("Transaction failed", error);
+            }
+        }
+
+        document.getElementById("connectWalletBtn").addEventListener("click", connectWallet);
+        document.getElementById("sentTransactionBtn").addEventListener("click", sentTonTransaction);
     </script>
-<style>  
-/* Header Container */
-.header-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 20px;
-    background: linear-gradient(135deg, #6a11cb, #2575fc); /* Gradient arka plan */
-    border-radius: 10px; /* Yuvarlak köşeler */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Gölge efekti */
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    width: 95%; /* Genişlik */
-    margin: 10px auto; /* Ortala */
-}
-
-/* Rank Container */
-.rank-container {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.rank-items {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.rank-items img.logo {
-    width: 50px; /* Logo boyutu */
-    height: 50px;
-    border-radius: 50%; /* Yuvarlak logo */
-    border: 2px solid #fff; /* Beyaz çerçeve */
-}
-
-.rank-info {
-    display: flex;
-    flex-direction: column;
-    gap: 5px; /* İçerikler arası boşluk */
-}
-
-#rank {
-    font-size: 24px; /* Büyük yazı boyutu */
-    font-weight: bold;
-    color: #fff; /* Beyaz yazı */
-}
-
-/* Kullanıcı Bilgileri */
-.user-info {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.user-photo {
-    width: 30px; /* Kullanıcı fotoğrafı boyutu */
-    height: 30px;
-    border-radius: 50%; /* Yuvarlak fotoğraf */
-    border: 2px solid #fff; /* Beyaz çerçeve */
-}
-
-#user-name {
-    font-size: 14px;
-    color: #fff; /* Beyaz yazı */
-}
-
-/* Wallet Buttons Container */
-.wallet-buttons-container {
-    display: flex;
-    flex-direction: column; /* Butonları alt alta yerleştir */
-    gap: 10px; /* Butonlar arası boşluk */
-}
-
-#ton-connect {
-    /* TON Connect butonu için stil */
-}
-
-.trasact {
-    padding: 10px 20px;
-    background-color: #ff6f61; /* Canlı turuncu */
-    color: white;
-    border: none;
-    border-radius: 20px; /* Yuvarlak buton */
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: bold;
-    transition: background-color 0.3s ease; /* Geçiş efekti */
-}
-
-.trasact:hover {
-    background-color: #ff4a3d; /* Hover rengi */
-}
-
-#total-points {
-    font-size: 18px; /* Yazı boyutu */
-    font-weight: bold; /* Kalın yazı */
-    color: #333; /* Yazı rengi */
-}
-
-/* Tıklama Alanı */
-.coin-container {
-    text-align: center; /* İçeriği ortala */
-    margin-top: 20px; /* Üst boşluk */
-}
-/* Coin Count Container */
-.coin-count-container {
-    text-align: center; /* Metni ortala */
-    margin-top: 20px; /* Üst boşluk */
-    margin-bottom: 20px; /* Alt boşluk */
-    padding: 10px 20px; /* İç boşluk */
-    background-color: #f8f8f8; /* Arka plan rengi */
-    border-radius: 10px; /* Yuvarlak köşeler */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Gölge efekti */
-}
-
-.user-container {
-    display: flex;
-    justify-content: center; /* İçeriği ortala */
-    align-items: center; /* Dikeyde ortala */
-    gap: 10px; /* İçerikler arası boşluk */
-}
-
-
-
-
-</style>
-
 
     <script src="./assets/js/wallet.js"></script>
     <script src="./assets/js/main.js"></script>
 </body>
 </html>
-  
