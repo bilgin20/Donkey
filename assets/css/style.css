@@ -740,3 +740,62 @@ button:active {
     object-fit: cover; /* Fotoğrafın orantılı şekilde yerleşmesi */
 }
 </style>
+
+//bakalım olacakmı
+/* Header Container */
+.header-container {
+    display: flex;
+    justify-content: space-between; /* Sol ve sağ içerikleri yan yana hizala */
+    align-items: center; /* Dikeyde ortala */
+    padding: 10px 20px; /* İç boşluk */
+    background-color: #f8f8f8; /* Arka plan rengi */
+    border-bottom: 1px solid #ddd; /* Alt çizgi */
+}
+
+/* Rank Container */
+.rank-container {
+    display: flex;
+    align-items: center; /* İçerikleri dikeyde ortala */
+}
+
+.rank-items {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* İçerikler arası boşluk */
+}
+
+.rank-items img {
+    width: 30px; /* Resim boyutu */
+    height: auto;
+}
+
+#rank {
+    font-size: 18px; /* Yazı boyutu */
+    font-weight: bold; /* Kalın yazı */
+    color: #333; /* Yazı rengi */
+}
+
+/* Wallet Buttons Container */
+.wallet-buttons-container {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Butonlar arası boşluk */
+}
+
+#ton-connect {
+    /* TON Connect butonu için stil */
+}
+
+.trasact {
+    padding: 8px 16px; /* Buton iç boşluk */
+    background-color: #f19e36; /* Buton rengi */
+    color: white; /* Yazı rengi */
+    border: none; /* Kenarlık kaldır */
+    border-radius: 5px; /* Köşe yuvarlaklığı */
+    cursor: pointer; /* İmleç stil */
+    font-size: 14px; /* Yazı boyutu */
+}
+
+.trasact:hover {
+    background-color: #e08c2a; /* Hover rengi */
+}
