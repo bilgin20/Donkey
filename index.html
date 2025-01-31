@@ -37,16 +37,11 @@
         </div>
     </div>
 
-    <!-- Diğer İçerikler -->
+    <!-- Coin Count Container -->
     <div class="coin-count-container">
         <div class="user-container">
-            <!-- Buradaki kullanıcı bilgileri kaldırıldı -->
+            <span id="total-points" class="select-none">Total Points: 0</span>
         </div>
-    </div>
-
-    <!-- Toplam Puan -->
-    <div class="balance-guid">
-        <span id="total-points" class="select-none">Total Points: 0</span>
     </div>
 
     <!-- Tıklama Alanı -->
@@ -322,16 +317,6 @@ document.addEventListener("DOMContentLoaded", function () {
 .trasact:hover {
     background-color: #ff4a3d; /* Hover rengi */
 }
-/* Toplam Puan Container */
-.balance-guid {
-    text-align: center; /* Metni ortala */
-    margin-top: 20px; /* Üst boşluk */
-    margin-bottom: 20px; /* Alt boşluk */
-    padding: 10px 20px; /* İç boşluk */
-    background-color: #f8f8f8; /* Arka plan rengi */
-    border-radius: 10px; /* Yuvarlak köşeler */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Gölge efekti */
-}
 
 #total-points {
     font-size: 18px; /* Yazı boyutu */
@@ -344,6 +329,27 @@ document.addEventListener("DOMContentLoaded", function () {
     text-align: center; /* İçeriği ortala */
     margin-top: 20px; /* Üst boşluk */
 }
+/* Coin Count Container */
+.coin-count-container {
+    text-align: center; /* Metni ortala */
+    margin-top: 20px; /* Üst boşluk */
+    margin-bottom: 20px; /* Alt boşluk */
+    padding: 10px 20px; /* İç boşluk */
+    background-color: #f8f8f8; /* Arka plan rengi */
+    border-radius: 10px; /* Yuvarlak köşeler */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Gölge efekti */
+}
+
+.user-container {
+    display: flex;
+    justify-content: center; /* İçeriği ortala */
+    align-items: center; /* Dikeyde ortala */
+    gap: 10px; /* İçerikler arası boşluk */
+}
+
+
+
+
 </style>
 
 
