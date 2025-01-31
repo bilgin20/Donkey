@@ -718,7 +718,7 @@ button:active {
     box-shadow: 0 4px 6px rgba(0, 128, 0, 0.4);
 }
 </style>
-
+<script>
 .coin-count-container {
     display: flex;
     justify-content: center; /* Ortalamak için */
@@ -739,3 +739,4 @@ button:active {
     border-radius: 50%; /* Yuvarlak hale getirme */
     object-fit: cover; /* Fotoğrafın orantılı şekilde yerleşmesi */
 }
+</style>
