@@ -718,7 +718,7 @@ button:active {
     box-shadow: 0 4px 6px rgba(0, 128, 0, 0.4);
 }
 </style>
-<script>
+<style>
 .coin-count-container {
     display: flex;
     justify-content: center; /* Ortalamak için */
