@@ -719,3 +719,23 @@ button:active {
 }
 </style>
 
+.coin-count-container {
+    display: flex;
+    justify-content: center; /* Ortalamak için */
+    align-items: center; /* Dikeyde ortalamak için */
+    gap: 15px; /* Öğeler arasındaki boşluk */
+    margin-top: 20px; /* Üstten biraz boşluk */
+}
+
+.user-container {
+    display: flex;
+    align-items: center; /* Kullanıcı fotoğrafı ve adı yan yana */
+    gap: 10px; /* Fotoğraf ile isim arasındaki boşluk */
+}
+
+.user-photo {
+    width: 50px;  /* Fotoğrafın genişliği */
+    height: 50px; /* Fotoğrafın yüksekliği */
+    border-radius: 50%; /* Yuvarlak hale getirme */
+    object-fit: cover; /* Fotoğrafın orantılı şekilde yerleşmesi */
+}
