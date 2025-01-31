@@ -748,8 +748,13 @@ button:active {
     justify-content: space-between; /* Sol ve sağ içerikleri yan yana hizala */
     align-items: center; /* Dikeyde ortala */
     padding: 10px 20px; /* İç boşluk */
-    background-color: #f8f8f8; /* Arka plan rengi */
+    background-color: #ffffff; /* Arka plan rengi */
     border-bottom: 1px solid #ddd; /* Alt çizgi */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Gölge efekti */
+    position: sticky; /* Sayfanın en üstüne sabitle */
+    top: 0; /* Üstten 0 piksel boşluk */
+    z-index: 1000; /* Diğer içeriklerin üzerinde görünmesini sağla */
+    width: 100%; /* Genişlik */
 }
 
 /* Rank Container */
