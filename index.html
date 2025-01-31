@@ -124,6 +124,46 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log("Telegram WebApp desteklenmiyor!");
     }
 });
+        document.addEventListener("DOMContentLoaded", function () {
+    // Toplam puanı güncelle
+    let totalPoints = 0;
+    const totalPointsElement = document.getElementById("total-points");
+
+    // Tıklama olayı
+    const coinElement = document.getElementById("coin");
+    if (coinElement) {
+        coinElement.addEventListener("click", function () {
+            totalPoints += 1; // Her tıklamada puanı artır
+            totalPointsElement.textContent = `Total Points: ${totalPoints}`; // Puanı güncelle
+        });
+    }
+
+    // Telegram kullanıcı bilgilerini yükle
+    if (window.Telegram && window.Telegram.WebApp) {
+        const tg = window.Telegram.WebApp;
+        tg.expand(); // WebApp tam ekran aç
+
+        console.log("Telegram WebApp initDataUnsafe:", tg.initDataUnsafe); // initDataUnsafe'ı konsola yazdıralım
+
+        const user = tg.initDataUnsafe?.user;
+        if (user) {
+            const userName = user.username || `ID: ${user.id || "Bilinmiyor"}`; // Kullanıcı adı yoksa ID göster
+            const userPhoto = user.photo_url || "default-avatar.png"; // Fotoğraf yoksa varsayılan fotoğraf
+
+            // Kullanıcı adını 'user-name' id'li elemana yerleştirelim
+            const userNameElement = document.getElementById("user-name");
+            userNameElement.innerHTML = userName; // Kullanıcı adını buraya ekliyoruz
+
+            // Kullanıcı fotoğrafını 'user-photo' id'li elemana yerleştirelim
+            const userPhotoElement = document.getElementById("user-photo");
+            userPhotoElement.src = userPhoto; // Kullanıcı fotoğrafını buraya ekliyoruz
+        } else {
+            console.log("Telegram kullanıcı bilgisi bulunamadı!");
+        }
+    } else {
+        console.log("Telegram WebApp desteklenmiyor!");
+    }
+});
 </script>
      <script>
       
