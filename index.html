@@ -11,6 +11,87 @@
     <link rel="icon" type="image/x-icon" href="./assets/favicon/favicon.ico">
     <script src="https://telegram.org/js/telegram-web-app.js?56"></script>
     <script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .rank-container {
+            background-color: #f19e36;
+            padding: 10px;
+            text-align: center;
+            color: white;
+        }
+
+        .coin-count-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .user-photo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+
+        .coin-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .wallet-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .message-container {
+            background-color: #fff;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .menu-container {
+            display: flex;
+            justify-content: space-around;
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+        }
+
+        .menu-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .button {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .progress-bar {
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            margin: 20px;
+            height: 10px;
+        }
+
+        .progress {
+            background-color: #f19e36;
+            height: 100%;
+            border-radius: 10px;
+        }
+    </style>
 </head>
 <body>
     <div class="rank-container">
