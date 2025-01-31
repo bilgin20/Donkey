@@ -128,4 +128,4 @@ function getDailyReward() {
   }
 }
 
-rewardBtn.addEventListener('click', getDailyReward);
+
