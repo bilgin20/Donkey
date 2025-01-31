@@ -45,7 +45,7 @@
     </div>
 
     <!-- Toplam Puan -->
-    <div class="total-points-container">
+    <div class="balance-guid">
         <span id="total-points" class="select-none">Total Points: 0</span>
     </div>
 
@@ -91,6 +91,10 @@
         <div class="progress"></div>
     </div>
 
+    <script src="./assets/js/wallet.js"></script>
+    <script src="./assets/js/main.js"></script>
+</body>
+</html>
 
  
     <script>
@@ -319,20 +323,20 @@ document.addEventListener("DOMContentLoaded", function () {
     background-color: #ff4a3d; /* Hover rengi */
 }
 /* Toplam Puan Container */
-.total-points-container {
+.balance-guid {
     text-align: center; /* Metni ortala */
     margin-top: 20px; /* Üst boşluk */
     margin-bottom: 20px; /* Alt boşluk */
+    padding: 10px 20px; /* İç boşluk */
+    background-color: #f8f8f8; /* Arka plan rengi */
+    border-radius: 10px; /* Yuvarlak köşeler */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Gölge efekti */
 }
 
 #total-points {
     font-size: 18px; /* Yazı boyutu */
     font-weight: bold; /* Kalın yazı */
     color: #333; /* Yazı rengi */
-    background-color: #f8f8f8; /* Arka plan rengi */
-    padding: 10px 20px; /* İç boşluk */
-    border-radius: 10px; /* Yuvarlak köşeler */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Gölge efekti */
 }
 
 /* Tıklama Alanı */
