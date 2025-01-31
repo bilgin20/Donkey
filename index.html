@@ -18,7 +18,7 @@
         <!-- Sol Taraf: Rank Container -->
         <div class="rank-container">
             <div class="rank-items">
-                <img src="./assets/images/hamster.png" class="select-none" width="30px">
+                <img src="./assets/images/hamster.png" class="select-none logo" width="50px">
                 <span id="rank" class="select-none">DONKEY</span>
             </div>
         </div>
@@ -36,6 +36,7 @@
             <img id="user-photo" src="" alt="User Photo" class="user-photo">
             <h1 id="user-name" class="select-none"></h1>
         </div>
+        <div class="user-container">
     </div>
 
     <div class="coin-container">
@@ -78,6 +79,7 @@
     <div class="progress-bar">
         <div class="progress"></div>
     </div>
+
 
  
     <script>
@@ -172,12 +174,12 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("sentTransactionBtn").addEventListener("click", sentTonTransaction);
     </script>
 <style>  
-  /* Header Container */
+/* Header Container */
 .header-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
+    padding: 15px 20px;
     background: linear-gradient(135deg, #6a11cb, #2575fc); /* Gradient arka plan */
     border-radius: 10px; /* Yuvarlak köşeler */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Gölge efekti */
@@ -192,24 +194,24 @@ document.addEventListener("DOMContentLoaded", function () {
 .rank-container {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 15px;
 }
 
 .rank-items {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 15px;
 }
 
-.rank-items img {
-    width: 30px; /* Resim boyutu */
-    height: 30px;
-    border-radius: 50%; /* Yuvarlak resim */
+.rank-items img.logo {
+    width: 50px; /* Logo boyutu */
+    height: 50px;
+    border-radius: 50%; /* Yuvarlak logo */
     border: 2px solid #fff; /* Beyaz çerçeve */
 }
 
 #rank {
-    font-size: 18px;
+    font-size: 24px; /* Büyük yazı boyutu */
     font-weight: bold;
     color: #fff; /* Beyaz yazı */
 }
@@ -217,8 +219,8 @@ document.addEventListener("DOMContentLoaded", function () {
 /* Wallet Buttons Container */
 .wallet-buttons-container {
     display: flex;
-    align-items: center;
-    gap: 10px;
+    flex-direction: column; /* Butonları alt alta yerleştir */
+    gap: 10px; /* Butonlar arası boşluk */
 }
 
 #ton-connect {
@@ -226,7 +228,7 @@ document.addEventListener("DOMContentLoaded", function () {
 }
 
 .trasact {
-    padding: 8px 16px;
+    padding: 10px 20px;
     background-color: #ff6f61; /* Canlı turuncu */
     color: white;
     border: none;
@@ -240,7 +242,7 @@ document.addEventListener("DOMContentLoaded", function () {
 .trasact:hover {
     background-color: #ff4a3d; /* Hover rengi */
 }
-<style>
+</style>
 
 
     <script src="./assets/js/wallet.js"></script>
