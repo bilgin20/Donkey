@@ -12,16 +12,74 @@
     <script src="https://telegram.org/js/telegram-web-app.js?56"></script>
     <script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
 </head>
-<script>
-  fetch('login.html')
-    .then(res => res.text())
-    .then(data => document.getElementById('header-placeholder').innerHTML = data);
-</script>
-<body>
+<!-- Coin count container -->
+<div class="coin-count-container">
+    <div class="user-container">
+        <!-- Kullanıcı fotoğrafı ve adı -->
+        <img id="user-photo" src="" alt="User Photo" class="user-photo">
+        <h1 id="user-name" class="select-none"></h1>
+    </div>
+    <!-- Bilgisayar resmi burada gelecek -->
+    <img src="./assets/images/pc.png" width="45px">
+</div>
 
-<div class="user-info">
-            <span>Kullanıcı Adı: </span><span class="userCont">Yükleniyor...</span>
-        </div>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    if (window.Telegram && window.Telegram.WebApp) {
+        const tg = window.Telegram.WebApp;
+        tg.expand(); // WebApp tam ekran aç
+
+        console.log("Telegram WebApp initDataUnsafe:", tg.initDataUnsafe); // initDataUnsafe'ı konsola yazdıralım
+
+        const user = tg.initDataUnsafe?.user;
+        if (user) {
+            const userName = user.username || `ID: ${user.id || "Bilinmiyor"}`; // Kullanıcı adı yoksa ID göster
+            const userPhoto = user.photo_url || "default-avatar.png"; // Fotoğraf yoksa varsayılan fotoğraf
+
+            // Konsola kullanıcı adı ve fotoğraf bilgisini yazdıralım
+            console.log("Kullanıcı Adı:", userName);
+            console.log("Kullanıcı Fotoğrafı:", userPhoto);
+
+            // Kullanıcı adını 'user-name' id'li elemana yerleştirelim
+            const userNameElement = document.getElementById("user-name");
+            userNameElement.innerHTML = userName; // Kullanıcı adını buraya ekliyoruz
+
+            // Kullanıcı fotoğrafını 'user-photo' id'li elemana yerleştirelim
+            const userPhotoElement = document.getElementById("user-photo");
+            userPhotoElement.src = userPhoto; // Kullanıcı fotoğrafını buraya ekliyoruz
+        } else {
+            console.log("Telegram kullanıcı bilgisi bulunamadı!");
+        }
+    } else {
+        console.log("Telegram WebApp desteklenmiyor!");
+    }
+});
+</script>
+
+<style>
+.coin-count-container {
+    display: flex;
+    justify-content: center; /* Ortalamak için */
+    align-items: center; /* Dikeyde ortalamak için */
+    gap: 15px; /* Öğeler arasındaki boşluk */
+    margin-top: 20px; /* Üstten biraz boşluk */
+}
+
+.user-container {
+    display: flex;
+    align-items: center; /* Kullanıcı fotoğrafı ve adı yan yana */
+    gap: 10px; /* Fotoğraf ile isim arasındaki boşluk */
+}
+
+.user-photo {
+    width: 50px;  /* Fotoğrafın genişliği */
+    height: 50px; /* Fotoğrafın yüksekliği */
+    border-radius: 50%; /* Yuvarlak hale getirme */
+    object-fit: cover; /* Fotoğrafın orantılı şekilde yerleşmesi */
+}
+</style>
+
+<body>
     
     <!-- Coin Count Section -->
     <div class="coin-count-container">
