@@ -88,7 +88,7 @@
         </div>
     </header>
 
-    <!-- Diğer içerikler buraya gelecek -->
+    <!-- Rank Container -->
     <div class="rank-container">
         <div class="rank-items">
             <h3 class="select-none"></h3>
@@ -98,6 +98,155 @@
         </div>
     </div>
 
-    <!-- Diğer HTML içerikleri buraya eklenebilir -->
+    <!-- Coin count container -->
+    <div class="coin-count-container">
+        <div class="user-container">
+            <img id="user-photo" src="" alt="User Photo" class="user-photo">
+            <h1 id="user-name" class="select-none"></h1>
+        </div>
+    </div>
+
+    <!-- Coin Container -->
+    <div class="coin-container">
+        <img src="./assets/images/hamster.png" id="coin" class="select-none" width="300px" />
+    </div>
+
+    <!-- Message from the Lord of the Donkey -->
+    <div class="message-container">
+        <div class="message-content">
+            <h2>Message from the Lord of the Donkey:</h2>
+            <p>Airdrop Date: March 2025-April 2025</p>
+            <a href="day.html">Daily Reward System</a>
+        </div>
+    </div>
+
+    <!-- Menu Container -->
+    <div class="menu-container">
+        <div class="power">
+            <img src="./assets/images/28.png" width="40px">
+            <div class="power-count">
+                <span id="power" class="select-none">0</span>
+                <span class="gray select-none" id="total">/0</span>
+            </div>
+        </div>
+        <div class="menu-bottuns">
+            <a href="frens.html" class="button b-r">
+                <img src="./assets/images/1.png" alt="" width="28px">
+                <span class="select-none">friends</span>
+            </a>
+            <a href="earn.html" class="button b-r">
+                <img src="./assets/images/2.png" alt="" width="28px">
+                <span class="select-none">tasks</span>
+            </a>
+            <a href="boost.html" class="button">
+                <img src="./assets/images/3.png" alt="" width="28px">
+                <span class="select-none">balance</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="progress-bar">
+        <div class="progress"></div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            if (window.Telegram && window.Telegram.WebApp) {
+                const tg = window.Telegram.WebApp;
+                tg.expand(); // WebApp tam ekran aç
+
+                console.log("Telegram WebApp initDataUnsafe:", tg.initDataUnsafe); // initDataUnsafe'ı konsola yazdıralım
+
+                const user = tg.initDataUnsafe?.user;
+                if (user) {
+                    const userName = user.username || `ID: ${user.id || "Bilinmiyor"}`; // Kullanıcı adı yoksa ID göster
+                    const userPhoto = user.photo_url || "default-avatar.png"; // Fotoğraf yoksa varsayılan fotoğraf
+
+                    // Konsola kullanıcı adı ve fotoğraf bilgisini yazdıralım
+                    console.log("Kullanıcı Adı:", userName);
+                    console.log("Kullanıcı Fotoğrafı:", userPhoto);
+
+                    // Kullanıcı adını 'user-name' id'li elemana yerleştirelim
+                    const userNameElement = document.getElementById("user-name");
+                    userNameElement.innerHTML = userName; // Kullanıcı adını buraya ekliyoruz
+
+                    // Kullanıcı fotoğrafını 'user-photo' id'li elemana yerleştirelim
+                    const userPhotoElements = document.querySelectorAll("#user-photo");
+                    userPhotoElements.forEach(element => {
+                        element.src = userPhoto; // Kullanıcı fotoğrafını buraya ekliyoruz
+                    });
+                } else {
+                    console.log("Telegram kullanıcı bilgisi bulunamadı!");
+                }
+            } else {
+                console.log("Telegram WebApp desteklenmiyor!");
+            }
+        });
+
+        let isWalletConnected = false;
+        let tonConnectUI = null;
+
+        // Initialize TON Connect UI  
+        document.addEventListener("DOMContentLoaded", async function () {
+            tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
+                manifestUrl: 'https://bilgin20.github.io/Donkey/tonconnect-manifest.json',
+                buttonRootId: 'ton-connect'
+            });
+
+            // Check if wallet is already connected
+            const connectWallet = await tonConnectUI.getWallets();
+            if (connectWallet) {
+                isWalletConnected = true;
+                console.log("Wallet is already connected", connectWallet);
+            }
+        });
+
+        // Connect Wallet
+        async function connectWallet() {
+            if (isWalletConnected) {
+                console.log("Wallet already connected.");
+                return;
+            }
+            try {
+                const connectWallet = await tonConnectUI.connectWallet();
+                if (connectWallet) {
+                    isWalletConnected = true;
+                    console.log("Wallet connected:", connectWallet);
+                }
+            } catch (error) {
+                console.error("Error connecting to wallet", error);
+            }
+        }
+
+        // Send Transaction
+        async function sentTonTransaction() {
+            if (!isWalletConnected) {
+                console.error("Please connect your wallet first.");
+                return;
+            }
+            const transaction = {
+                messages: [
+                    {
+                        address: "UQBWIRtBw_keNmzkzecRm9TY8GkUU4IajzA482SV8YCIMxrn", // destination address
+                        amount: "20000000" // Toncoin in nanotons (0,02 TON)
+                    }
+                ]
+            };
+
+            try {
+                const result = await tonConnectUI.sendTransaction(transaction);
+                console.log("Transaction successful:", result);
+            } catch (error) {
+                console.error("Transaction failed", error);
+            }
+        }
+
+        document.getElementById("connectWalletBtn").addEventListener("click", connectWallet);
+        document.getElementById("sentTransactionBtn").addEventListener("click", sentTonTransaction);
+    </script>
+
+    <script src="./assets/js/wallet.js"></script>
+    <script src="./assets/js/main.js"></script>
 </body>
 </html>
