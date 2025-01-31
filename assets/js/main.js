@@ -127,5 +127,5 @@ function getDailyReward() {
     rewardInfo.textContent = 'You have already claimed today\'s reward!';
   }
 }
-
+rewardBtn.addEventListener('click', getDailyReward);
 
