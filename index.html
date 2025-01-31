@@ -18,10 +18,11 @@
         <!-- Sol Taraf: Rank Container -->
         <div class="rank-container">
             <div class="rank-items">
-                <h3 class="select-none"></h3>
-                <span></span>
-                <img src="./assets/images/hamster.png" class="select-none" width="30px">
-                <span id="rank" class="select-none">DONKEY</span>
+                <img src="./assets/images/hamster.png" class="select-none" width="40px">
+                <div class="rank-text">
+                    <span class="rank-title">Your Rank</span>
+                    <span id="rank" class="select-none">DONKEY</span>
+                </div>
             </div>
         </div>
 
@@ -80,6 +81,7 @@
     <div class="progress-bar">
         <div class="progress"></div>
     </div>
+
     <script>
 document.addEventListener("DOMContentLoaded", function () {
     if (window.Telegram && window.Telegram.WebApp) {
@@ -173,44 +175,64 @@ document.addEventListener("DOMContentLoaded", function () {
     </script>
 
 <style>  
-    /* Header Container */
+   /* Header Container */
 .header-container {
     display: flex;
-    justify-content: space-between; /* Sol ve sağ içerikleri yan yana hizala */
-    align-items: center; /* Dikeyde ortala */
-    padding: 10px 20px; /* İç boşluk */
-    background-color: #f8f8f8; /* Arka plan rengi */
-    border-bottom: 1px solid #ddd; /* Alt çizgi */
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 25px;
+    background: linear-gradient(135deg, #6a11cb, #2575fc); /* Gradient arka plan */
+    border-radius: 15px; /* Yuvarlak köşeler */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Gölge efekti */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    width: 95%; /* Genişlik */
+    margin: 10px auto; /* Ortala */
 }
 
 /* Rank Container */
 .rank-container {
     display: flex;
-    align-items: center; /* İçerikleri dikeyde ortala */
+    align-items: center;
+    gap: 15px;
 }
 
 .rank-items {
     display: flex;
     align-items: center;
-    gap: 10px; /* İçerikler arası boşluk */
+    gap: 10px;
 }
 
 .rank-items img {
-    width: 30px; /* Resim boyutu */
-    height: auto;
+    width: 40px; /* Resim boyutu */
+    height: 40px;
+    border-radius: 50%; /* Yuvarlak resim */
+    border: 2px solid #fff; /* Beyaz çerçeve */
+}
+
+.rank-text {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.rank-title {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.8); /* Yarı saydam beyaz */
 }
 
 #rank {
-    font-size: 18px; /* Yazı boyutu */
-    font-weight: bold; /* Kalın yazı */
-    color: #333; /* Yazı rengi */
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff; /* Beyaz yazı */
 }
 
 /* Wallet Buttons Container */
 .wallet-buttons-container {
     display: flex;
     align-items: center;
-    gap: 10px; /* Butonlar arası boşluk */
+    gap: 15px;
 }
 
 #ton-connect {
@@ -218,17 +240,19 @@ document.addEventListener("DOMContentLoaded", function () {
 }
 
 .trasact {
-    padding: 8px 16px; /* Buton iç boşluk */
-    background-color: #f19e36; /* Buton rengi */
-    color: white; /* Yazı rengi */
-    border: none; /* Kenarlık kaldır */
-    border-radius: 5px; /* Köşe yuvarlaklığı */
-    cursor: pointer; /* İmleç stil */
-    font-size: 14px; /* Yazı boyutu */
+    padding: 10px 20px;
+    background-color: #ff6f61; /* Canlı turuncu */
+    color: white;
+    border: none;
+    border-radius: 25px; /* Yuvarlak buton */
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background-color 0.3s ease; /* Geçiş efekti */
 }
 
 .trasact:hover {
-    background-color: #e08c2a; /* Hover rengi */
+    background-color: #ff4a3d; /* Hover rengi */
 }
 <style>
 
