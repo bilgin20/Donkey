@@ -124,66 +124,8 @@ document.addEventListener("DOMContentLoaded", function () {
     </div>
 
 
-     <script>
-      
-    let isWalletConnected = false;
-    let tonConnectUI = null;
-//Initialize TON Connect UI  
-    document.addEventListener("DOMContentLoaded", async function() {
-        tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
-            manifestUrl: 'https://bilgin20.github.io/Donkey/tonconnect-manifest.json',
-            buttonRootId: 'ton-connect'
-        });
-//check if wallet is already connected
-        const connectWallet = await tonConnectUI.getWallets();
-        if (connectWallet) {
-            isWalletConnected = true;
-            console.log("Wallet is already connected", connectedWallet);
-        }
-    });
-    // Connet Wallet
-    async function connectWallet() {
-        if (isWalletConnected) {
-            console.log("Wallet already connected.");
-            return;
-        }
-        try {
-            const connectWallet = await tonConnectUI.connectWallet();
-            if (connectWallet) {
-                isWalletConnected = true;
-                console.log("Wallet connected:", connectedWallet);
-            }
-        } catch (error) {
-            console.error("Error connecting to wallet", error);
-        }
-    }
-   // Send Transaction
-    async function sentTonTransaction() {
-        if (!isWalletConnected) {
-            console.error("Please connect your wallet first.");
-            return;
-        }
-        const transaction = {
-            messages: [
-                {
-                    address: "UQBWIRtBw_keNmzkzecRm9TY8GkUU4IajzA482SV8YCIMxrn", // destination address
-                    amount: "20000000" //Toncoin in nanotons (0,02 TON)
-                }
-            ]
-        };
-
-        try {
-            const result = await tonConnectUI.sendTransaction(transaction);
-            console.log("Transaction successful:", result);
-        } catch (error) {
-            console.error("Transaction failed", error);
-        }
-    }
-
-    document.getElementById("connectWalletBtn").addEventListener("click", connectWallet);
-    document.getElementById("sentTransactionBtn").addEventListener("click", sentTonTransaction);
-    </script>
-
+ 
+   <script src="./assets/js/wallet.js"></script>
     <script src="./assets/js/main.js"></script>
 </body>
 </html>
