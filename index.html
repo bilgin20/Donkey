@@ -58,11 +58,23 @@
                 const tg = window.Telegram.WebApp;
                 tg.expand();
 
+                console.log("Telegram WebApp initDataUnsafe:", tg.initDataUnsafe);
+                
                 const user = tg.initDataUnsafe?.user;
                 if (user) {
-                    document.getElementById("user-name").innerText = user.username || `ID: ${user.id || "Unknown"}`;
-                    document.getElementById("user-photo").src = user.photo_url || "default-avatar.png";
+                    const userName = user.username || `ID: ${user.id || "Bilinmiyor"}`;
+                    const userPhoto = user.photo_url || "default-avatar.png";
+                    
+                    console.log("Kullanıcı Adı:", userName);
+                    console.log("Kullanıcı Fotoğrafı:", userPhoto);
+                    
+                    document.getElementById("user-name").innerHTML = userName;
+                    document.getElementById("user-photo").src = userPhoto;
+                } else {
+                    console.log("Telegram kullanıcı bilgisi bulunamadı!");
                 }
+            } else {
+                console.log("Telegram WebApp desteklenmiyor!");
             }
         });
     </script>
