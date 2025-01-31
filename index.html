@@ -44,6 +44,12 @@
         </div>
     </div>
 
+    <!-- Toplam Puan -->
+    <div class="total-points-container">
+        <span id="total-points" class="select-none">Total Points: 0</span>
+    </div>
+
+    <!-- Tıklama Alanı -->
     <div class="coin-container">
         <img src="./assets/images/hamster.png" id="coin" class="select-none" width="300px" />
     </div>
@@ -84,6 +90,7 @@
     <div class="progress-bar">
         <div class="progress"></div>
     </div>
+
 
  
     <script>
@@ -270,6 +277,28 @@ document.addEventListener("DOMContentLoaded", function () {
 
 .trasact:hover {
     background-color: #ff4a3d; /* Hover rengi */
+}
+/* Toplam Puan Container */
+.total-points-container {
+    text-align: center; /* Metni ortala */
+    margin-top: 20px; /* Üst boşluk */
+    margin-bottom: 20px; /* Alt boşluk */
+}
+
+#total-points {
+    font-size: 18px; /* Yazı boyutu */
+    font-weight: bold; /* Kalın yazı */
+    color: #333; /* Yazı rengi */
+    background-color: #f8f8f8; /* Arka plan rengi */
+    padding: 10px 20px; /* İç boşluk */
+    border-radius: 10px; /* Yuvarlak köşeler */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Gölge efekti */
+}
+
+/* Tıklama Alanı */
+.coin-container {
+    text-align: center; /* İçeriği ortala */
+    margin-top: 20px; /* Üst boşluk */
 }
 </style>
 
