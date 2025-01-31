@@ -1,27 +1,173 @@
 <!DOCTYPE html>
-<html>
+<html lang="tr">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./assets/css/style.css">
   <script src="./assets/3.4.5"></script>
+
   <style>
-    body,
-    html {
+    /* Genel stil ayarları */
+    body, html {
       height: 100%;
       margin: 0;
+      font-family: 'coin-font', sans-serif;
+      color: #ffffff; /* Yazı rengi beyaz */
     }
 
     .full-height {
-      height: 108%;
+      height: 95%;
+    }
+
+    /* Arka plan siyah ve diğer stil ayarları */
+    body {
+      background-color: #000000; /* Siyah arka plan */
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      color: #ffffff; /* Yazılar beyaz */
+    }
+
+    /* Genel container ayarları */
+    .flex {
+      display: flex;
+    }
+
+    .flex-col {
+      flex-direction: column;
+    }
+
+    .flex-grow {
+      flex-grow: 1;
+    }
+
+    /* Davet Buttonu */
+    #inviteButton {
+      background-color: #1c1c1c;
+      color: white;
+      width: 100%;
+      padding: 16px;
+      border-radius: 30px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: background-color 0.3s;
+    }
+
+    #inviteButton:hover {
+      background-color: #333333;
+    }
+
+    /* Metin renkleri ve font stil ayarları */
+    h2, h3 {
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .text-yellow-400 {
+      color: #fbbf24; /* Sarı renk */
+    }
+
+    /* Text styling */
+    .text-center {
+      text-align: center;
+    }
+
+    .mb-4 {
+      margin-bottom: 16px;
+    }
+
+    .mt-6 {
+      margin-top: 24px;
+    }
+
+    /* Davet alanı */
+    .bg-slate-900 {
+      background-color: #333333; /* Koyu gri arka plan */
+    }
+
+    .p-4 {
+      padding: 16px;
+    }
+
+    .rounded-3xl {
+      border-radius: 30px;
+    }
+
+    .shadow-lg {
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .mr-4 {
+      margin-right: 16px;
+    }
+
+    .w-12 {
+      width: 48px;
+    }
+
+    .h-12 {
+      height: 48px;
+    }
+
+    .space-y-4 {
+      margin-bottom: 16px;
+    }
+
+    /* Copy message */
+    #copyMessage {
+      display: none;
+      color: #10b981; /* Yeşil renk */
+    }
+
+    /* İçeriğe Flex düzenleme */
+    .flex.justify-between.items-center {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* Sayfa düzeni ve boyutlar */
+    .max-w-md {
+      max-width: 350px;
+    }
+
+    .mx-auto {
+      margin: 0 auto;
+    }
+
+    .text-white {
+      color: white;
+    }
+
+    .rounded-lg {
+      border-radius: 16px;
+    }
+
+    /* Responsive düzen */
+    @media screen and (min-width: 764px) {
+      body,
+      .boost {
+        max-width: 350px;
+        margin: 0 auto;
+        background-color: #191919;
+        background-size: 350px;
+        background-position: center;
+      }
+    }
+
+    /* Open details bağlantısı için ortalama */
+    .centered-link {
+      display: flex;
+      justify-content: center;
+      margin-top: 24px;
     }
   </style>
-  <link rel="stylesheet" href="./assets/css/style-2.css">
-  <link rel="stylesheet" href="./assets/css/responsive-1.css">
 </head>
 
 <body class="boost">
-  <div class=" text-white p-4 rounded-lg max-w-md mx-auto full-height flex flex-col">
+  <div class="text-white p-4 rounded-lg max-w-md mx-auto full-height flex flex-col">
     <div class="flex justify-between items-center mb-4">
       <a href="index.html">
         <svg width="35px" height="35px" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -35,45 +181,75 @@
       <p class="text-center mb-4">You and your friend will receive bonuses</p>
       <div class="space-y-4">
         <div class="bg-slate-900 p-4 flex items-center rounded-3xl shadow-lg">
-          <img src="./assets/images/hamster.png" width="50px" height="50px" alt="gift" class="w-12 h-12 mr-4">   
+          <img src="./assets/images/hamster.png" width="50px" height="50px" alt="gift" class="w-12 h-12 mr-4">
           <div>
             <p class="font-bold">Invite a friend</p>
             <p class="text-yellow-400">+5,000 for you and your friend</p>
           </div>
         </div>
       </div>
+      <h3 class="mt-6 mb-2">List of your friends (0)</h3>
+      <div class="space-y-2">
+        <div class="space-y-2"></div>
+      </div>
+    </div>
+    
+    <!-- Open details bağlantısını ortalamak için div -->
+    <div class="centered-link">
+      <a href="guid.html" class="text-white">Open details</a>
+    </div>
 
-      <h3 class="mt-6 mb-2">List of your friends (0)</h3><div class="space-y-2"><div class="space-y-2"></div>    </div>
-  </div>
-  <button id="inviteButton" class="bg-slate-900 hover:bg-slate-900/95 text-white w-full py-6 mt-4 rounded-3xl shadow-lg flex items-center justify-center">
-    <span>Invite a friend</span>
-  </button>
-  <p id="copyMessage" class="text-center text-green-500 mt-4 hidden">Copy Success..!</p>
+    <button id="inviteButton" class="bg-slate-900 hover:bg-slate-900/95 text-white w-full py-6 mt-4 rounded-3xl shadow-lg flex items-center justify-center">
+      <span>Invite a friend</span>
+    </button>
+    <p id="copyMessage" class="text-center text-green-500 mt-4 hidden">Copy Success..!</p>
   </div>
 
   <script>
-    
     var chatId = "<?php echo isset($_GET['chat_id']) ? htmlspecialchars($_GET['chat_id']) : ''; ?>";
-    
-    document.getElementById('inviteButton').addEventListener('click', function() {
-    
+
+    document.getElementById('inviteButton').addEventListener('click', function () {
       const textToCopy = "https://t.me/share/url?url=https://t.me/DonkeyToken_bot?start=" + chatId + "&text=Join%20me%20in%20DonkeyCoin%20and%20start%20mining%20today!%20Let's%20earn%20together!";
-      
-      navigator.clipboard.writeText(textToCopy).then(function() {
+      navigator.clipboard.writeText(textToCopy).then(function () {
         const copyMessage = document.getElementById('copyMessage');
         copyMessage.classList.remove('hidden');
         copyMessage.classList.add('block');
 
-        setTimeout(function() {
+        setTimeout(function () {
           copyMessage.classList.remove('block');
           copyMessage.classList.add('hidden');
-          window.location = "https://t.me/share/url?url=https://t.me/DonkeyToken_bot?start=" + chatId + "&text=Join%20me%20in%20DonkeyCoin%20and%20start%20mining%20today!%20Let's%20earn%20together!"
+          window.location = "https://t.me/share/url?url=https://t.me/DonkeyToken_bot?start=" + chatId + "&text=Join%20me%20in%20DonkeyCoin%20and%20start%20mining%20today!%20Let's%20earn%20together!";
         }, 2000);
-      }).catch(function(err) {
+      }).catch(function (err) {
         console.error('Error in copying text: ', err);
       });
     });
   </script>
+   <!-- Menü Kısmı -->
+    <div class="menu-container">
+        <div class="menu-bottuns">
+            <a href="index.html" class="button b-r">
+                <img src="./assets/images/tap.gif" alt="" width="28px">
+                <span class="select-none">Home</span>
+            </a>
+            <a href="frens.html" class="button b-r">
+                <img src="./assets/images/1.png" alt="" width="28px">
+                <span class="select-none">friends</span>
+            </a>
+            <a href="earn.html" class="button b-r">
+                <img src="./assets/images/2.png" alt="" width="28px">
+                <span class="select-none">tasks</span>
+            </a>
+            <a href="day.html" class="button b-r">
+                <img src="./assets/images/t.png" alt="" width="28px">
+                <span class="select-none">Daily</span>
+            </a>
+            <a href="boost.html" class="button">
+                <img src="./assets/images/3.png" alt="" width="28px">
+                <span class="select-none">balance</span>
+            </a>
+        </div>
+    </div>
 </body>
 
 </html>
