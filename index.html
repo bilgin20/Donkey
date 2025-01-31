@@ -18,11 +18,8 @@
         <!-- Sol Taraf: Rank Container -->
         <div class="rank-container">
             <div class="rank-items">
-                <img src="./assets/images/hamster.png" class="select-none" width="40px">
-                <div class="rank-text">
-                    <span class="rank-title">Your Rank</span>
-                    <span id="rank" class="select-none">DONKEY</span>
-                </div>
+                <img src="./assets/images/hamster.png" class="select-none" width="30px">
+                <span id="rank" class="select-none">DONKEY</span>
             </div>
         </div>
 
@@ -82,6 +79,7 @@
         <div class="progress"></div>
     </div>
 
+ 
     <script>
 document.addEventListener("DOMContentLoaded", function () {
     if (window.Telegram && window.Telegram.WebApp) {
@@ -173,16 +171,15 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("connectWalletBtn").addEventListener("click", connectWallet);
     document.getElementById("sentTransactionBtn").addEventListener("click", sentTonTransaction);
     </script>
-
 <style>  
-   /* Header Container */
+  /* Header Container */
 .header-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 25px;
+    padding: 10px 20px;
     background: linear-gradient(135deg, #6a11cb, #2575fc); /* Gradient arka plan */
-    border-radius: 15px; /* Yuvarlak köşeler */
+    border-radius: 10px; /* Yuvarlak köşeler */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Gölge efekti */
     position: sticky;
     top: 0;
@@ -195,7 +192,7 @@ document.addEventListener("DOMContentLoaded", function () {
 .rank-container {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 10px;
 }
 
 .rank-items {
@@ -205,21 +202,10 @@ document.addEventListener("DOMContentLoaded", function () {
 }
 
 .rank-items img {
-    width: 40px; /* Resim boyutu */
-    height: 40px;
+    width: 30px; /* Resim boyutu */
+    height: 30px;
     border-radius: 50%; /* Yuvarlak resim */
     border: 2px solid #fff; /* Beyaz çerçeve */
-}
-
-.rank-text {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
-
-.rank-title {
-    font-size: 14px;
-    color: rgba(255, 255, 255, 0.8); /* Yarı saydam beyaz */
 }
 
 #rank {
@@ -232,7 +218,7 @@ document.addEventListener("DOMContentLoaded", function () {
 .wallet-buttons-container {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 10px;
 }
 
 #ton-connect {
@@ -240,11 +226,11 @@ document.addEventListener("DOMContentLoaded", function () {
 }
 
 .trasact {
-    padding: 10px 20px;
+    padding: 8px 16px;
     background-color: #ff6f61; /* Canlı turuncu */
     color: white;
     border: none;
-    border-radius: 25px; /* Yuvarlak buton */
+    border-radius: 20px; /* Yuvarlak buton */
     cursor: pointer;
     font-size: 14px;
     font-weight: bold;
@@ -256,7 +242,9 @@ document.addEventListener("DOMContentLoaded", function () {
 }
 <style>
 
+
     <script src="./assets/js/wallet.js"></script>
     <script src="./assets/js/main.js"></script>
 </body>
 </html>
+  
