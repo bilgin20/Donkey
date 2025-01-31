@@ -19,7 +19,7 @@
             <span id="user-name" class="select-none"></span>
         </div>
         <div class="header-center">
-            <span id="rank" class="select-none">DONKEY</span>
+            <img id="user-photo" src="" alt="User Photo" class="user-photo" width="40px" height="40px" style="border-radius: 50%;">
         </div>
         <div class="header-right">
             <div id="ton-connect"></div>
@@ -111,8 +111,10 @@
                     userNameElement.innerHTML = userName; // Kullanıcı adını buraya ekliyoruz
 
                     // Kullanıcı fotoğrafını 'user-photo' id'li elemana yerleştirelim
-                    const userPhotoElement = document.getElementById("user-photo");
-                    userPhotoElement.src = userPhoto; // Kullanıcı fotoğrafını buraya ekliyoruz
+                    const userPhotoElements = document.querySelectorAll("#user-photo");
+                    userPhotoElements.forEach(element => {
+                        element.src = userPhoto; // Kullanıcı fotoğrafını buraya ekliyoruz
+                    });
                 } else {
                     console.log("Telegram kullanıcı bilgisi bulunamadı!");
                 }
@@ -203,6 +205,11 @@
 .header-right {
     justify-content: flex-end;
     gap: 10px;
+}
+.user-photo {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
 }
 </style>
 
