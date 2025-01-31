@@ -19,9 +19,14 @@
         <div class="rank-container">
             <div class="rank-items">
                 <img src="./assets/images/hamster.png" class="select-none logo" width="50px">
-                <span id="rank" class="select-none">DONKEY</span>
-                <div class="user-container">
-            </div>
+                <div class="rank-info">
+                    <span id="rank" class="select-none">DONKEY</span>
+                    <!-- Telegram Kullanıcı Bilgileri -->
+                    <div class="user-info">
+                        <img id="user-photo" src="" alt="User Photo" class="user-photo">
+                        <span id="user-name" class="select-none"></span>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -35,11 +40,8 @@
     <!-- Diğer İçerikler -->
     <div class="coin-count-container">
         <div class="user-container">
-            <img id="user-photo" src="" alt="User Photo" class="user-photo">
-            <h1 id="user-name" class="select-none"></h1>
+            <!-- Buradaki kullanıcı bilgileri kaldırıldı -->
         </div>
-        <div class="user-container">
-            </div>
     </div>
 
     <div class="coin-container">
@@ -82,7 +84,6 @@
     <div class="progress-bar">
         <div class="progress"></div>
     </div>
-
 
  
     <script>
@@ -213,9 +214,34 @@ document.addEventListener("DOMContentLoaded", function () {
     border: 2px solid #fff; /* Beyaz çerçeve */
 }
 
+.rank-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px; /* İçerikler arası boşluk */
+}
+
 #rank {
     font-size: 24px; /* Büyük yazı boyutu */
     font-weight: bold;
+    color: #fff; /* Beyaz yazı */
+}
+
+/* Kullanıcı Bilgileri */
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-photo {
+    width: 30px; /* Kullanıcı fotoğrafı boyutu */
+    height: 30px;
+    border-radius: 50%; /* Yuvarlak fotoğraf */
+    border: 2px solid #fff; /* Beyaz çerçeve */
+}
+
+#user-name {
+    font-size: 14px;
     color: #fff; /* Beyaz yazı */
 }
 
