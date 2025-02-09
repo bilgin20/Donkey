@@ -20,9 +20,198 @@
         </a>
        
     </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animal Matching Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: black; /* Black background */
+            color: white; /* White text */
+        }
+        #game-container {
+            width: 90%;
+            margin: auto;
+        }
+        .box-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .box {
+            width: 100px;
+            height: 100px;
+            border: 2px solid white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #ddd;
+            cursor: pointer;
+            position: relative;
+        }
+        .timer {
+            font-size: 18px;
+            margin-top: 5px;
+        }
+        .image-box {
+            width: 80px;
+            height: 80px;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+        .selected {
+            border: 2px solid red;
+        }
+        .correct {
+            background-color: lightgreen;
+            pointer-events: none;
+        }
+        #score {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+        #bottom-frame {
+            border: 3px solid white;
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            width: 70%;
+            margin: auto;
+            background-color: #ddd;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: white;
+            color: black;
+            border: none;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Animal Matching Game</h1>
+    <p id="score">Score: 0</p>
 
-    <iframe id="webviev" src="https://play.famobi.com/wrapper/archery-world-tour/A1000-10" style="width:100%; height:600px; border:none;"></iframe>
+    <div id="game-container">
+        <h2>Top Boxes</h2>
+        <div class="box-container" id="top-boxes">
+            <div class="box" data-animal=""><span>?</span></div>
+            <div class="box" data-animal=""><span>?</span></div>
+            <div class="box" data-animal=""><span>?</span></div>
+            <div class="box" data-animal=""><span>?</span></div>
+        </div>
+        <p id="countdown" class="timer"></p>
 
+        <h2>Animal Choices</h2>
+        <div id="bottom-frame">
+            <img src="https://img.icons8.com/color/100/cat.png" class="image-box" data-animal="cat">
+            <img src="https://img.icons8.com/color/100/dog.png" class="image-box" data-animal="dog">
+            <img src="https://img.icons8.com/color/100/lion.png" class="image-box" data-animal="lion">
+            <img src="https://img.icons8.com/color/100/snake.png" class="image-box" data-animal="snake">
+            <img src="https://img.icons8.com/color/100/elephant.png" class="image-box" data-animal="elephant">
+            <img src="https://img.icons8.com/color/100/chicken.png" class="image-box" data-animal="chicken">
+            <img src="https://img.icons8.com/color/100/bear.png" class="image-box" data-animal="bear">
+            <img src="https://img.icons8.com/color/100/rabbit.png" class="image-box" data-animal="rabbit">
+            <img src="https://img.icons8.com/color/100/butterfly.png" class="image-box" data-animal="butterfly">
+            <img src="https://img.icons8.com/color/100/frog.png" class="image-box" data-animal="frog">
+        </div>
+
+        <button onclick="checkMatch()">Check</button>
+    </div>
+
+    <script>
+        let selectedAnimal = null;
+        let score = 0;
+        let endTime = localStorage.getItem("endTime");
+
+        function startTimer() {
+            let now = new Date().getTime();
+            let timeLeft = endTime - now;
+
+            if (timeLeft > 0) {
+                let hours = Math.floor(timeLeft / (1000 * 60 * 60));
+                let minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                let seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+                document.getElementById("countdown").innerText = `New game in: ${hours}h ${minutes}m ${seconds}s`;
+
+                setTimeout(startTimer, 1000);
+            } else {
+                localStorage.removeItem("endTime");
+                initializeGame();
+            }
+        }
+
+        function getRandomAnimals() {
+            let animals = ["cat", "dog", "lion", "snake", "elephant", "chicken", "bear", "rabbit", "butterfly", "frog"];
+            return animals.sort(() => 0.5 - Math.random()).slice(0, 4);
+        }
+
+        function initializeGame() {
+            let selectedAnimals = getRandomAnimals();
+            document.querySelectorAll("#top-boxes .box").forEach((box, index) => {
+                box.dataset.animal = selectedAnimals[index];
+                box.innerHTML = "<span>?</span>";
+                box.classList.remove("correct");
+                box.dataset.selectedAnimal = "";
+            });
+
+            if (!endTime) {
+                endTime = new Date().getTime() + 8 * 60 * 60 * 1000;
+                localStorage.setItem("endTime", endTime);
+            }
+            startTimer();
+        }
+
+        document.querySelectorAll(".image-box").forEach(img => {
+            img.addEventListener("click", () => {
+                selectedAnimal = img.dataset.animal;
+                document.querySelectorAll(".image-box").forEach(i => i.classList.remove("selected"));
+                img.classList.add("selected");
+            });
+        });
+
+        document.querySelectorAll("#top-boxes .box").forEach(box => {
+            box.addEventListener("click", () => {
+                if (selectedAnimal && !box.classList.contains("correct")) {
+                    box.dataset.selectedAnimal = selectedAnimal;
+                    box.innerHTML = `<img src="https://img.icons8.com/color/100/${selectedAnimal}.png" width="80">`;
+                }
+            });
+        });
+
+        function checkMatch() {
+            let correctCount = 0;
+            document.querySelectorAll("#top-boxes .box").forEach(box => {
+                if (box.dataset.selectedAnimal === box.dataset.animal) {
+                    box.classList.add("correct");
+                    correctCount++;
+                } else if (!box.classList.contains("correct")) {
+                    box.innerHTML = "<span>?</span>";
+                    box.dataset.selectedAnimal = "";
+                }
+            });
+
+            if (correctCount === 4) {
+                score += 5000;
+                document.getElementById("score").innerText = `Score: ${score}`;
+                alert("Congratulations! You earned 5000 points.");
+                localStorage.setItem("endTime", new Date().getTime() + 8 * 60 * 60 * 1000);
+                startTimer();
+            }
+        }
+
+        initializeGame();
+    </script>
+    
     <script>
         const webviev = document.getElementById('webviev');
 
