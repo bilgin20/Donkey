@@ -8,8 +8,10 @@
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            background-color: black; /* Black background */
-            color: white; /* White text */
+            background-color: black;
+            color: white;
+            margin: 0;
+            padding: 0;
         }
         #game-container {
             width: 90%;
@@ -19,6 +21,7 @@
             display: flex;
             justify-content: center;
             gap: 10px;
+            flex-wrap: wrap;
             margin-bottom: 10px;
         }
         .box {
@@ -60,7 +63,7 @@
             justify-content: center;
             flex-wrap: wrap;
             gap: 10px;
-            width: 70%;
+            width: 80%;
             margin: auto;
             background-color: #ddd;
         }
@@ -72,6 +75,24 @@
             color: black;
             border: none;
             margin-top: 10px;
+        }
+
+        /* Mobil uyumluluk */
+        @media (max-width: 768px) {
+            .box {
+                width: 80px;
+                height: 80px;
+            }
+            .image-box {
+                width: 70px;
+                height: 70px;
+            }
+            #bottom-frame {
+                width: 95%;
+            }
+            button {
+                width: 100%;
+            }
         }
     </style>
 </head>
