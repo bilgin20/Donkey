@@ -78,6 +78,24 @@
             margin: 10px auto;
             display: block;
         }
+
+        /* Mobil uyumluluk */
+        @media (max-width: 768px) {
+            .box {
+                width: 80px;
+                height: 80px;
+            }
+            .image-box {
+                width: 70px;
+                height: 70px;
+            }
+            #bottom-frame {
+                width: 95%;
+            }
+            button {
+                width: 60%;
+            }
+        }
     </style>
 </head>
 <body>
@@ -113,7 +131,7 @@
 
     <script>
         let selectedAnimal = null;
-        let score = localStorage.getItem("score") ? parseInt(localStorage.getItem("score")) : 0;
+        let score = 0;
         let endTime = localStorage.getItem("endTime");
 
         function startTimer() {
@@ -128,8 +146,8 @@
 
                 setTimeout(startTimer, 1000);
             } else {
-                localStorage.clear();
-                location.reload();
+                localStorage.removeItem("endTime");
+                initializeGame();
             }
         }
 
@@ -139,18 +157,12 @@
         }
 
         function initializeGame() {
-            document.getElementById("score").innerText = `Score: ${score}`;
-            let savedBoxes = JSON.parse(localStorage.getItem("boxes")) || {};
-            let selectedAnimals = savedBoxes.animals || getRandomAnimals();
-
+            let selectedAnimals = getRandomAnimals();
             document.querySelectorAll("#top-boxes .box").forEach((box, index) => {
                 box.dataset.animal = selectedAnimals[index];
-                if (savedBoxes[index]) {
-                    box.innerHTML = `<img src="https://img.icons8.com/color/100/${savedBoxes[index]}.png" width="80">`;
-                    if (savedBoxes[index] === selectedAnimals[index]) {
-                        box.classList.add("correct");
-                    }
-                }
+                box.innerHTML = "<span>?</span>";
+                box.classList.remove("correct");
+                box.dataset.selectedAnimal = "";
             });
 
             if (!endTime) {
@@ -163,16 +175,16 @@
         document.querySelectorAll(".image-box").forEach(img => {
             img.addEventListener("click", () => {
                 selectedAnimal = img.dataset.animal;
+                document.querySelectorAll(".image-box").forEach(i => i.classList.remove("selected"));
+                img.classList.add("selected");
             });
         });
 
         document.querySelectorAll("#top-boxes .box").forEach(box => {
             box.addEventListener("click", () => {
                 if (selectedAnimal && !box.classList.contains("correct")) {
+                    box.dataset.selectedAnimal = selectedAnimal;
                     box.innerHTML = `<img src="https://img.icons8.com/color/100/${selectedAnimal}.png" width="80">`;
-                    let savedBoxes = JSON.parse(localStorage.getItem("boxes")) || {};
-                    savedBoxes[Array.from(box.parentNode.children).indexOf(box)] = selectedAnimal;
-                    localStorage.setItem("boxes", JSON.stringify(savedBoxes));
                 }
             });
         });
@@ -180,16 +192,21 @@
         function checkMatch() {
             let correctCount = 0;
             document.querySelectorAll("#top-boxes .box").forEach(box => {
-                if (box.innerHTML.includes(box.dataset.animal)) {
+                if (box.dataset.selectedAnimal === box.dataset.animal) {
                     box.classList.add("correct");
                     correctCount++;
+                } else if (!box.classList.contains("correct")) {
+                    box.innerHTML = "<span>?</span>";
+                    box.dataset.selectedAnimal = "";
                 }
             });
 
             if (correctCount === 4) {
                 score += 5000;
-                localStorage.setItem("score", score);
                 document.getElementById("score").innerText = `Score: ${score}`;
+                alert("Congratulations! You earned 5000 points.");
+                localStorage.setItem("endTime", new Date().getTime() + 8 * 60 * 60 * 1000);
+                startTimer();
             }
         }
 
